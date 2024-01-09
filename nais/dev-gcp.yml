@@ -1,0 +1,44 @@
+kind: Application
+apiVersion: nais.io/v1alpha1
+metadata:
+  name: pensjon-opptjening-afp-api
+  namespace: pensjonopptjening
+  labels:
+    team: pensjonopptjening
+spec:
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: dev-gcp
+    - name: POPP_URL
+      value: https://pensjon-popp-q2.dev-fss-pub.nais.io/popp/api
+    - name: POPP_API_ID
+      value: dev-fss.pensjonopptjening.pensjon-popp-q2
+  azure:
+    application:
+      enabled: true
+  accessPolicy:
+    outbound:
+      external:
+        - host: pensjon-popp-q2.dev-fss-pub.nais.io
+  image: {{ image }}
+  liveness:
+    path: /actuator/health/liveness
+    port: 8080
+    initialDelay: 50
+  readiness:
+    path: /actuator/health/readiness
+    port: 8080
+    initialDelay: 50
+  prometheus:
+    enabled: true
+    path: /actuator/prometheus
+  replicas:
+    min: 1
+    max: 1
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
