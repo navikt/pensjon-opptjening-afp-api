@@ -28,6 +28,12 @@ java {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven("https://maven.pkg.github.com/navikt/maven-release") {
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
 }
 
 dependencies {
