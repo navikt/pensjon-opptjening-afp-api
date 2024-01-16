@@ -1,0 +1,8 @@
+POPP_URL: http://localhost:9991/api
+PDL_URL: http://localhost:9991/graphql
+
+no.nav.security.jwt:
+  issuer:
+    azure:
+      discoveryurl: http://localhost:${mock-oauth2-server.port}/azure/.well-known/openid-configuration
+      accepted_audience: pensjon-opptjening-afp-api

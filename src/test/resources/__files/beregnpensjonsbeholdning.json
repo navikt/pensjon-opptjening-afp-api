@@ -1,0 +1,1089 @@
+[
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 47580.42706427342,
+    "vedtakId": null,
+    "fomDato": 1420066800000,
+    "tomDato": 1430388000000,
+    "beholdningGrunnlag": 250475.0,
+    "beholdningGrunnlagAvkortet": 250475.0,
+    "beholdningInnskudd": 47580.42706427342,
+    "beholdningInnskuddUtenOmsorg": 45335.975000000006,
+    "oppdateringArsak": "NY_OPPTJENING",
+    "lonnsvekstregulering": null,
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2013,
+      "belop": 250475.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250498840,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250499427
+        },
+        "inntektId": 587920423,
+        "fnr": "31507401271",
+        "inntektAr": 2013,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 250475
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250498834
+          },
+          "inntektId": 587920422,
+          "fnr": "31507401271",
+          "inntektAr": 2013,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 250475
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 48493.97126390747,
+    "vedtakId": null,
+    "fomDato": 1430474400000,
+    "tomDato": 1451516400000,
+    "beholdningGrunnlag": 250475.0,
+    "beholdningGrunnlagAvkortet": 250475.0,
+    "beholdningInnskudd": 47580.42706427342,
+    "beholdningInnskuddUtenOmsorg": 45335.975000000006,
+    "oppdateringArsak": "REGULERING",
+    "lonnsvekstregulering": {
+      "lonnsvekstreguleringId": null,
+      "reguleringsbelop": 913.5441996340523,
+      "reguleringsDato": 1430474400000,
+      "changeStamp": null
+    },
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2013,
+      "belop": 250475.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250498840,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250499427
+        },
+        "inntektId": 587920423,
+        "fnr": "31507401271",
+        "inntektAr": 2013,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 250475
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250498834
+          },
+          "inntektId": 587920422,
+          "fnr": "31507401271",
+          "inntektAr": 2013,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 250475
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 96986.95501124638,
+    "vedtakId": null,
+    "fomDato": 1451602800000,
+    "tomDato": 1462010400000,
+    "beholdningGrunnlag": 259768.0,
+    "beholdningGrunnlagAvkortet": 259768.0,
+    "beholdningInnskudd": 48492.983747338905,
+    "beholdningInnskuddUtenOmsorg": 47018.00800000001,
+    "oppdateringArsak": "NY_OPPTJENING",
+    "lonnsvekstregulering": null,
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2014,
+      "belop": 259768.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250499546,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250500042
+        },
+        "inntektId": 587920425,
+        "fnr": "31507401271",
+        "inntektAr": 2014,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 259768
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250499545
+          },
+          "inntektId": 587920424,
+          "fnr": "31507401271",
+          "inntektAr": 2014,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 259768
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 99683.19236055903,
+    "vedtakId": null,
+    "fomDato": 1462096800000,
+    "tomDato": 1483138800000,
+    "beholdningGrunnlag": 259768.0,
+    "beholdningGrunnlagAvkortet": 259768.0,
+    "beholdningInnskudd": 48492.983747338905,
+    "beholdningInnskuddUtenOmsorg": 47018.00800000001,
+    "oppdateringArsak": "REGULERING",
+    "lonnsvekstregulering": {
+      "lonnsvekstreguleringId": null,
+      "reguleringsbelop": 2696.2373493126506,
+      "reguleringsDato": 1462096800000,
+      "changeStamp": null
+    },
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2014,
+      "belop": 259768.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250499546,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250500042
+        },
+        "inntektId": 587920425,
+        "fnr": "31507401271",
+        "inntektAr": 2014,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 259768
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250499545
+          },
+          "inntektId": 587920424,
+          "fnr": "31507401271",
+          "inntektAr": 2014,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 259768
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 149524.34289120833,
+    "vedtakId": null,
+    "fomDato": 1483225200000,
+    "tomDato": 1493546400000,
+    "beholdningGrunnlag": 266235.0,
+    "beholdningGrunnlagAvkortet": 266235.0,
+    "beholdningInnskudd": 49841.1505306493,
+    "beholdningInnskuddUtenOmsorg": 48188.535,
+    "oppdateringArsak": "NY_OPPTJENING",
+    "lonnsvekstregulering": null,
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2015,
+      "belop": 266235.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250500200,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250500490
+        },
+        "inntektId": 587920467,
+        "fnr": "31507401271",
+        "inntektAr": 2015,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 266235
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250500199
+          },
+          "inntektId": 587920466,
+          "fnr": "31507401271",
+          "inntektAr": 2015,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 266235
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 151228.9204001681,
+    "vedtakId": null,
+    "fomDato": 1493632800000,
+    "tomDato": 1514674800000,
+    "beholdningGrunnlag": 266235.0,
+    "beholdningGrunnlagAvkortet": 266235.0,
+    "beholdningInnskudd": 49841.1505306493,
+    "beholdningInnskuddUtenOmsorg": 48188.535,
+    "oppdateringArsak": "REGULERING",
+    "lonnsvekstregulering": {
+      "lonnsvekstreguleringId": null,
+      "reguleringsbelop": 1704.5775089597737,
+      "reguleringsDato": 1493632800000,
+      "changeStamp": null
+    },
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2015,
+      "belop": 266235.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250500200,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250500490
+        },
+        "inntektId": 587920467,
+        "fnr": "31507401271",
+        "inntektAr": 2015,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 266235
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250500199
+          },
+          "inntektId": 587920466,
+          "fnr": "31507401271",
+          "inntektAr": 2015,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 266235
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 201639.96480179907,
+    "vedtakId": null,
+    "fomDato": 1514761200000,
+    "tomDato": 1525082400000,
+    "beholdningGrunnlag": 272892.0,
+    "beholdningGrunnlagAvkortet": 272892.0,
+    "beholdningInnskudd": 50411.044401630956,
+    "beholdningInnskuddUtenOmsorg": 49393.452000000005,
+    "oppdateringArsak": "NY_OPPTJENING",
+    "lonnsvekstregulering": null,
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2016,
+      "belop": 272892.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250500653,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250500970
+        },
+        "inntektId": 587920469,
+        "fnr": "31507401271",
+        "inntektAr": 2016,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 272892
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250500652
+          },
+          "inntektId": 587920468,
+          "fnr": "31507401271",
+          "inntektAr": 2016,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 272892
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 208636.8715804215,
+    "vedtakId": null,
+    "fomDato": 1525168800000,
+    "tomDato": 1546210800000,
+    "beholdningGrunnlag": 272892.0,
+    "beholdningGrunnlagAvkortet": 272892.0,
+    "beholdningInnskudd": 50411.044401630956,
+    "beholdningInnskuddUtenOmsorg": 49393.452000000005,
+    "oppdateringArsak": "REGULERING",
+    "lonnsvekstregulering": {
+      "lonnsvekstreguleringId": null,
+      "reguleringsbelop": 6996.906778622419,
+      "reguleringsDato": 1525168800000,
+      "changeStamp": null
+    },
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2016,
+      "belop": 272892.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250500653,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250500970
+        },
+        "inntektId": 587920469,
+        "fnr": "31507401271",
+        "inntektAr": 2016,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 272892
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250500652
+          },
+          "inntektId": 587920468,
+          "fnr": "31507401271",
+          "inntektAr": 2016,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 272892
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 260798.75205645413,
+    "vedtakId": null,
+    "fomDato": 1546297200000,
+    "tomDato": 1556618400000,
+    "beholdningGrunnlag": 277476.0,
+    "beholdningGrunnlagAvkortet": 277476.0,
+    "beholdningInnskudd": 52161.88047603263,
+    "beholdningInnskuddUtenOmsorg": 50223.156,
+    "oppdateringArsak": "NY_OPPTJENING",
+    "lonnsvekstregulering": null,
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2017,
+      "belop": 277476.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250501064,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250501299
+        },
+        "inntektId": 587920427,
+        "fnr": "31507401271",
+        "inntektAr": 2017,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 277476
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250501063
+          },
+          "inntektId": 587920426,
+          "fnr": "31507401271",
+          "inntektAr": 2017,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 277476
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 268805.27374458726,
+    "vedtakId": null,
+    "fomDato": 1556704800000,
+    "tomDato": 1577746800000,
+    "beholdningGrunnlag": 277476.0,
+    "beholdningGrunnlagAvkortet": 277476.0,
+    "beholdningInnskudd": 52161.88047603263,
+    "beholdningInnskuddUtenOmsorg": 50223.156,
+    "oppdateringArsak": "REGULERING",
+    "lonnsvekstregulering": {
+      "lonnsvekstreguleringId": null,
+      "reguleringsbelop": 8006.521688133129,
+      "reguleringsDato": 1556704800000,
+      "changeStamp": null
+    },
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2017,
+      "belop": 277476.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250501064,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250501299
+        },
+        "inntektId": 587920427,
+        "fnr": "31507401271",
+        "inntektAr": 2017,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 277476
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250501063
+          },
+          "inntektId": 587920426,
+          "fnr": "31507401271",
+          "inntektAr": 2017,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 277476
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 322569.16380248894,
+    "vedtakId": null,
+    "fomDato": 1577833200000,
+    "tomDato": 1588240800000,
+    "beholdningGrunnlag": 284969.0,
+    "beholdningGrunnlagAvkortet": 284969.0,
+    "beholdningInnskudd": 53763.89005790169,
+    "beholdningInnskuddUtenOmsorg": 51579.389,
+    "oppdateringArsak": "NY_OPPTJENING",
+    "lonnsvekstregulering": null,
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2018,
+      "belop": 284969.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250501455,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250501763
+        },
+        "inntektId": 587920429,
+        "fnr": "31507401271",
+        "inntektAr": 2018,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 284969
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250501454
+          },
+          "inntektId": 587920428,
+          "fnr": "31507401271",
+          "inntektAr": 2018,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 284969
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 327407.70125952625,
+    "vedtakId": null,
+    "fomDato": 1588327200000,
+    "tomDato": 1609369200000,
+    "beholdningGrunnlag": 284969.0,
+    "beholdningGrunnlagAvkortet": 284969.0,
+    "beholdningInnskudd": 53763.89005790169,
+    "beholdningInnskuddUtenOmsorg": 51579.389,
+    "oppdateringArsak": "REGULERING",
+    "lonnsvekstregulering": {
+      "lonnsvekstreguleringId": null,
+      "reguleringsbelop": 4838.53745703731,
+      "reguleringsDato": 1588327200000,
+      "changeStamp": null
+    },
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2018,
+      "belop": 284969.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250501455,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250501763
+        },
+        "inntektId": 587920429,
+        "fnr": "31507401271",
+        "inntektAr": 2018,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 284969
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250501454
+          },
+          "inntektId": 587920428,
+          "fnr": "31507401271",
+          "inntektAr": 2018,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 284969
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 381978.0652562217,
+    "vedtakId": null,
+    "fomDato": 1609455600000,
+    "tomDato": 1619776800000,
+    "beholdningGrunnlag": 294089.0,
+    "beholdningGrunnlagAvkortet": 294089.0,
+    "beholdningInnskudd": 54570.363996695465,
+    "beholdningInnskuddUtenOmsorg": 53230.109000000004,
+    "oppdateringArsak": "NY_OPPTJENING",
+    "lonnsvekstregulering": null,
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2019,
+      "belop": 294089.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250501853,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250502110
+        },
+        "inntektId": 587920471,
+        "fnr": "31507401271",
+        "inntektAr": 2019,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 294089
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250501852
+          },
+          "inntektId": 587920470,
+          "fnr": "31507401271",
+          "inntektAr": 2019,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 294089
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 401000.57290598156,
+    "vedtakId": null,
+    "fomDato": 1619863200000,
+    "tomDato": 1640905200000,
+    "beholdningGrunnlag": 294089.0,
+    "beholdningGrunnlagAvkortet": 294089.0,
+    "beholdningInnskudd": 54570.363996695465,
+    "beholdningInnskuddUtenOmsorg": 53230.109000000004,
+    "oppdateringArsak": "REGULERING",
+    "lonnsvekstregulering": {
+      "lonnsvekstreguleringId": null,
+      "reguleringsbelop": 19022.50764975988,
+      "reguleringsDato": 1619863200000,
+      "changeStamp": null
+    },
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2019,
+      "belop": 294089.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250501853,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250502110
+        },
+        "inntektId": 587920471,
+        "fnr": "31507401271",
+        "inntektAr": 2019,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 294089
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250501852
+          },
+          "inntektId": 587920470,
+          "fnr": "31507401271",
+          "inntektAr": 2019,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 294089
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 458286.9116188529,
+    "vedtakId": null,
+    "fomDato": 1640991600000,
+    "tomDato": 1651312800000,
+    "beholdningGrunnlag": 300000.0,
+    "beholdningGrunnlagAvkortet": 300000.0,
+    "beholdningInnskudd": 57286.33871287131,
+    "beholdningInnskuddUtenOmsorg": 54300.00000000001,
+    "oppdateringArsak": "NY_OPPTJENING",
+    "lonnsvekstregulering": null,
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2020,
+      "belop": 300000.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250502198,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250502372
+        },
+        "inntektId": 587920431,
+        "fnr": "31507401271",
+        "inntektAr": 2020,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 300000
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250502197
+          },
+          "inntektId": 587920430,
+          "fnr": "31507401271",
+          "inntektAr": 2020,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 300000
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 480147.1973030722,
+    "vedtakId": null,
+    "fomDato": 1651399200000,
+    "tomDato": 1672441200000,
+    "beholdningGrunnlag": 300000.0,
+    "beholdningGrunnlagAvkortet": 300000.0,
+    "beholdningInnskudd": 57286.33871287131,
+    "beholdningInnskuddUtenOmsorg": 54300.00000000001,
+    "oppdateringArsak": "REGULERING",
+    "lonnsvekstregulering": {
+      "lonnsvekstreguleringId": null,
+      "reguleringsbelop": 21860.28568421933,
+      "reguleringsDato": 1651399200000,
+      "changeStamp": null
+    },
+    "inntektOpptjeningBelop": {
+      "inntektOpptjeningBelopId": null,
+      "ar": 2020,
+      "belop": 300000.0,
+      "sumPensjonsgivendeInntekt": {
+        "changeStamp": {
+          "createdBy": "popp-testdata",
+          "createdDate": 1689250502198,
+          "updatedBy": "popp-testdata",
+          "updatedDate": 1689250502372
+        },
+        "inntektId": 587920431,
+        "fnr": "31507401271",
+        "inntektAr": 2020,
+        "kilde": "POPP",
+        "kommune": null,
+        "piMerke": null,
+        "inntektType": "SUM_PI",
+        "belop": 300000
+      },
+      "inntektListe": [
+        {
+          "changeStamp": {
+            "createdBy": "POPPTESTDATA",
+            "createdDate": 1689250498410,
+            "updatedBy": "popp-testdata",
+            "updatedDate": 1689250502197
+          },
+          "inntektId": 587920430,
+          "fnr": "31507401271",
+          "inntektAr": 2020,
+          "kilde": "PEN",
+          "kommune": "1337",
+          "piMerke": null,
+          "inntektType": "INN_LON",
+          "belop": 300000
+        }
+      ],
+      "changeStamp": null
+    },
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 480147.1973030722,
+    "vedtakId": null,
+    "fomDato": 1672527600000,
+    "tomDato": 1682848800000,
+    "beholdningGrunnlag": 0.0,
+    "beholdningGrunnlagAvkortet": 0.0,
+    "beholdningInnskudd": 0.0,
+    "beholdningInnskuddUtenOmsorg": 0.0,
+    "oppdateringArsak": "NY_OPPTJENING",
+    "lonnsvekstregulering": null,
+    "inntektOpptjeningBelop": null,
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 510924.6326501992,
+    "vedtakId": null,
+    "fomDato": 1682935200000,
+    "tomDato": 1703977200000,
+    "beholdningGrunnlag": 0.0,
+    "beholdningGrunnlagAvkortet": 0.0,
+    "beholdningInnskudd": 0.0,
+    "beholdningInnskuddUtenOmsorg": 0.0,
+    "oppdateringArsak": "REGULERING",
+    "lonnsvekstregulering": {
+      "lonnsvekstreguleringId": null,
+      "reguleringsbelop": 30777.43534712697,
+      "reguleringsDato": 1682935200000,
+      "changeStamp": null
+    },
+    "inntektOpptjeningBelop": null,
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  },
+  {
+    "beholdningId": null,
+    "fnr": "31507401271",
+    "status": "U",
+    "beholdningType": "PEN_B",
+    "belop": 510924.6326501992,
+    "vedtakId": null,
+    "fomDato": 1704063600000,
+    "tomDato": null,
+    "beholdningGrunnlag": 0.0,
+    "beholdningGrunnlagAvkortet": 0.0,
+    "beholdningInnskudd": 0.0,
+    "beholdningInnskuddUtenOmsorg": 0.0,
+    "oppdateringArsak": "NY_OPPTJENING",
+    "lonnsvekstregulering": null,
+    "inntektOpptjeningBelop": null,
+    "omsorgOpptjeningBelop": null,
+    "dagpengerOpptjeningBelop": null,
+    "forstegangstjenesteOpptjeningBelop": null,
+    "uforeOpptjeningBelop": null,
+    "changeStamp": null
+  }
+]

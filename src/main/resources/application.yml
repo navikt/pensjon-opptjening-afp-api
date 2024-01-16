@@ -10,3 +10,9 @@ management:
         enabled: true
     prometheus:
       enabled: true
+
+no.nav.security.jwt:
+  issuer:
+    azure:
+      discoveryurl: ${AZURE_APP_WELL_KNOWN_URL}
+      accepted_audience: ${AZURE_APP_CLIENT_ID}

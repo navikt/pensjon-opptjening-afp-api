@@ -13,9 +13,20 @@ spec:
       value: https://pensjon-popp-q2.dev-fss-pub.nais.io/popp/api
     - name: POPP_API_ID
       value: dev-fss.pensjonopptjening.pensjon-popp-q2
+    - name: PDL_URL
+      value: https://pdl-api.dev-fss-pub.nais.io/graphql
+    - name: PDL_API_ID
+      value: dev-fss.pdl.pdl-api
   azure:
+    sidecar:
+      enabled: true
+      autoLogin: true
     application:
       enabled: true
+      allowAllUsers: false
+      claims:
+        groups:
+          - id: "7ef907b4-ec9f-47dd-ab41-4e54ba32ceb1" #AAD pensjonopptjening testgruppe
   accessPolicy:
     outbound:
       external:
