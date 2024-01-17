@@ -30,12 +30,12 @@ jobs:
       - name: 'Setting Image ghcr Variabel'
         run: echo "IMAGE_GHCR=ghcr.io/${{ github.repository }}/pensjon-opptjening-afp-api:${{ env.DATE }}---${{ env.COMMIT_HASH }}" >> $GITHUB_ENV
 
-      # JAVA 17
-      - name: 'Java 17'
+      # JAVA
+      - name: 'Setup Java'
         uses: actions/setup-java@v3
         with:
-          distribution: 'zulu'
-          java-version: 17
+          distribution: 'temurin'
+          java-version: 21
           cache: 'gradle'
 
       # BYGGER DOCKER CONTAINER

@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val jacksonVersion = "2.15.3"
+val jacksonVersion = "2.16.1"
 val logbackEncoderVersion = "7.4"
 val azureAdClient = "0.0.7"
-val wiremockVersion = "2.35.1"
-val mockitoVersion = "5.2.1"
-val navTokenSupportVersion = "3.2.0" // TODO: 4.0.3 requires newer jvm
+val wiremockVersion = "3.0.1"
+val mockitoKotlinVersion = "5.2.1"
+val navTokenSupportVersion = "4.1.0"
 val hibernateValidatorVersion = "8.0.1.Final"
 
 plugins {
@@ -21,7 +21,7 @@ group = "no.nav.pensjon.opptjening"
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
@@ -50,7 +50,7 @@ dependencies {
 
     testImplementation(kotlin("test"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoVersion")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
     testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:$wiremockVersion")
     testImplementation("no.nav.security:token-validation-spring-test:$navTokenSupportVersion")
 }
@@ -62,7 +62,7 @@ tasks.test {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
 }
 
