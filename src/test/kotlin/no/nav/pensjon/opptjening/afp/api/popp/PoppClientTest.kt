@@ -31,6 +31,24 @@ class PoppClientTest {
     }
 
     @Test
+    fun `kaller POPP med beregnUtenUttakAP = true`() {
+        wiremock.givenThat(
+            WireMock.post(WireMock.urlPathEqualTo("/api/beholdning/beregn"))
+                .willReturn(
+                    WireMock.ok()
+                        .withBodyFile("beregnpensjonsbeholdning.json")
+                        .withHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                )
+        )
+
+        client.beregnPensjonsbeholdning("tjafs", 2023, 2023)
+
+        val expected = """{"fnr":"tjafs","fraOgMed":2023,"tilOgMed":2023,"beregnUtenUttakAP":true}"""
+
+        assertThat(wiremock.serveEvents.requests.single().request.bodyAsString).isEqualTo(expected)
+    }
+
+    @Test
     fun `kan deserialsiere respons`() {
         wiremock.givenThat(
             WireMock.post(WireMock.urlPathEqualTo("/api/beholdning/beregn"))

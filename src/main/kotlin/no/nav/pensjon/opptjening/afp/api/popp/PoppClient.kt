@@ -92,7 +92,9 @@ private data class BeregnPensjonsbeholdningRequest(
     val fnr: String,
     val fraOgMed: Int,
     val tilOgMed: Int,
-)
+){
+    val beregnUtenUttakAP = true
+}
 
 private data class SimulerPensjonsbeholdningRequest(
     val fnr: String,
