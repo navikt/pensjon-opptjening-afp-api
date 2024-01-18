@@ -1,9 +1,6 @@
 package no.nav.pensjon.opptjening.afp.api.pdl
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.pensjon.opptjening.afp.api.domain.Person
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
@@ -13,10 +10,10 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
 import org.springframework.http.RequestEntity
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import pensjon.opptjening.azure.ad.client.TokenProvider
 import java.net.URI
+import java.util.UUID
 
 @Component
 class PdlClient(
@@ -28,11 +25,10 @@ class PdlClient(
     private val restTemplate = RestTemplateBuilder().build()
 
     fun hentPerson(fnr: String): Person? {
-        try {
         val entity = RequestEntity<PdlQuery>(
             PdlQuery(graphqlQuery.hentPersonQuery(), FnrVariables(ident = fnr)),
             HttpHeaders().apply {
-                add("Nav-Call-Id", "TODO")
+                add("Nav-Call-Id", "${UUID.randomUUID()}")
                 add("Nav-Consumer-Id", "pensjon-opptjening-afp-api")
                 add("Tema", "PEN")
                 accept = listOf(MediaType.APPLICATION_JSON)
@@ -43,25 +39,15 @@ class PdlClient(
             URI.create(pdlUrl)
         )
 
-        val rr = restTemplate.exchange(
+        val response = restTemplate.exchange(
             entity,
-            String::class.java
-        )
+            PdlResponse::class.java
+        ).body
 
-        LoggerFactory.getLogger(this::class.java).error(rr.toString())
-        LoggerFactory.getLogger(this::class.java).error(rr.body.toString())
-
-            val response = jacksonObjectMapper().readValue<PdlResponse?>(rr.body.toString())
-
-            response?.error?.extensions?.code?.also {
+        response?.error?.extensions?.code?.also {
             if (it == PdlErrorCode.SERVER_ERROR) throw RuntimeException(response.error.toString())
         }
         return response?.data?.hentPerson?.toDomain()
-
-        } catch (e: Exception){
-            LoggerFactory.getLogger(this::class.java).error("$e", e)
-            throw e
-        }
     }
 }
 

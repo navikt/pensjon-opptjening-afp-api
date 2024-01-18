@@ -2,6 +2,17 @@ query pdlPerson($ident: ID!) {
     hentPerson(ident: $ident) {
         foedsel {
             foedselsaar
+            foedselsdato
+            folkeregistermetadata{
+                ajourholdstidspunkt
+            }
+            metadata {
+                master
+                historisk
+                endringer {
+                    registrert
+                }
+            }
         }
         folkeregisteridentifikator(historikk: true) {
             identifikasjonsnummer
