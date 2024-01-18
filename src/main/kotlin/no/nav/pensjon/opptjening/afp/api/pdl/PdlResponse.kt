@@ -85,7 +85,7 @@ internal data class Folkeregisteridentifikator(
 @JsonIgnoreProperties(ignoreUnknown = true)
 internal data class Foedsel(
     val foedselsaar: Int,
-    val foedselsdato: String,
+    val foedselsdato: String?,
     val metadata: Metadata,
     val folkeregistermetadata: Folkeregistermetadata? = null,
 )
