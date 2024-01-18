@@ -1,5 +1,7 @@
 package no.nav.pensjon.opptjening.afp.api.pdl
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.pensjon.opptjening.afp.api.domain.Person
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,6 +13,7 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
 import org.springframework.http.RequestEntity
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import pensjon.opptjening.azure.ad.client.TokenProvider
 import java.net.URI
@@ -40,12 +43,17 @@ class PdlClient(
             URI.create(pdlUrl)
         )
 
-        val response = restTemplate.exchange(
+        val rr = restTemplate.exchange(
             entity,
-            PdlResponse::class.java
-        ).body
+            String::class.java
+        )
 
-        response?.error?.extensions?.code?.also {
+        LoggerFactory.getLogger(this::class.java).error(rr.toString())
+        LoggerFactory.getLogger(this::class.java).error(rr.body.toString())
+
+            val response = jacksonObjectMapper().readValue<PdlResponse?>(rr.body.toString())
+
+            response?.error?.extensions?.code?.also {
             if (it == PdlErrorCode.SERVER_ERROR) throw RuntimeException(response.error.toString())
         }
         return response?.data?.hentPerson?.toDomain()
