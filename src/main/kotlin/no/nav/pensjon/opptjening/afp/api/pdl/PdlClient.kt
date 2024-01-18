@@ -1,6 +1,7 @@
 package no.nav.pensjon.opptjening.afp.api.pdl
 
 import no.nav.pensjon.opptjening.afp.api.domain.Person
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
@@ -24,6 +25,7 @@ class PdlClient(
     private val restTemplate = RestTemplateBuilder().build()
 
     fun hentPerson(fnr: String): Person? {
+        try {
         val entity = RequestEntity<PdlQuery>(
             PdlQuery(graphqlQuery.hentPersonQuery(), FnrVariables(ident = fnr)),
             HttpHeaders().apply {
@@ -47,6 +49,11 @@ class PdlClient(
             if (it == PdlErrorCode.SERVER_ERROR) throw RuntimeException(response.error.toString())
         }
         return response?.data?.hentPerson?.toDomain()
+
+        } catch (e: Exception){
+            LoggerFactory.getLogger(this::class.java).error("$e", e)
+            throw e
+        }
     }
 }
 

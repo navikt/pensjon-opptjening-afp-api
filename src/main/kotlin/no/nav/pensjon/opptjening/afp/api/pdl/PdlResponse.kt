@@ -86,7 +86,7 @@ internal data class Folkeregisteridentifikator(
 internal data class Foedsel(
     val foedselsaar: Int,
     val foedselsdato: String?,
-    val metadata: Metadata,
+    val metadata: Metadata?,
     val folkeregistermetadata: Folkeregistermetadata? = null,
 )
 
