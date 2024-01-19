@@ -29,7 +29,7 @@ class WebApi(
                 personId = request.personId,
                 afpGrunnlagBeholdninger = service.beregnAFPBeholdingsgrunnlag(
                     fnr = request.personId,
-                    fraOgMed = request.fraOgMedDato
+                    beholdningFraOgMed = request.fraOgMedDato
                 )
             )
         )
@@ -45,7 +45,7 @@ class WebApi(
                 personId = request.personId,
                 afpGrunnlagBeholdninger = service.simulerAFPBeholdningsgrunnlag(
                     fnr = request.personId,
-                    fraOgMed = request.fraOgMedDato,
+                    beholdningFraOgMed = request.fraOgMedDato,
                     inntekter = request.inntekter,
                 )
             )
