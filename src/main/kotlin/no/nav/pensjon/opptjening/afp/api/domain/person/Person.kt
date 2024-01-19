@@ -1,4 +1,4 @@
-package no.nav.pensjon.opptjening.afp.api.domain
+package no.nav.pensjon.opptjening.afp.api.domain.person
 
 class Person(
     val fødselsÅr: Int,

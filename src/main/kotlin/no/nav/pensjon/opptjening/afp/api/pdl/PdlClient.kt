@@ -1,6 +1,7 @@
 package no.nav.pensjon.opptjening.afp.api.pdl
 
-import no.nav.pensjon.opptjening.afp.api.domain.Person
+import no.nav.pensjon.opptjening.afp.api.domain.person.Person
+import no.nav.pensjon.opptjening.afp.api.domain.person.PersonException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
@@ -25,29 +26,41 @@ class PdlClient(
     private val restTemplate = RestTemplateBuilder().build()
 
     fun hentPerson(fnr: String): Person? {
-        val entity = RequestEntity<PdlQuery>(
-            PdlQuery(graphqlQuery.hentPersonQuery(), FnrVariables(ident = fnr)),
-            HttpHeaders().apply {
-                add("Nav-Call-Id", "${UUID.randomUUID()}")
-                add("Nav-Consumer-Id", "pensjon-opptjening-afp-api")
-                add("Tema", "PEN")
-                accept = listOf(MediaType.APPLICATION_JSON)
-                contentType = MediaType.APPLICATION_JSON
-                setBearerAuth(tokenProvider.getToken())
-            },
-            HttpMethod.POST,
-            URI.create(pdlUrl)
-        )
+        return try {
+            val entity = RequestEntity<PdlQuery>(
+                PdlQuery(graphqlQuery.hentPersonQuery(), FnrVariables(ident = fnr)),
+                HttpHeaders().apply {
+                    add("Nav-Call-Id", "${UUID.randomUUID()}")
+                    add("Nav-Consumer-Id", "pensjon-opptjening-afp-api")
+                    add("Tema", "PEN")
+                    accept = listOf(MediaType.APPLICATION_JSON)
+                    contentType = MediaType.APPLICATION_JSON
+                    setBearerAuth(tokenProvider.getToken())
+                },
+                HttpMethod.POST,
+                URI.create(pdlUrl)
+            )
 
-        val response = restTemplate.exchange(
-            entity,
-            PdlResponse::class.java
-        ).body
+            val response = restTemplate.exchange(
+                entity,
+                PdlResponse::class.java
+            ).body
 
-        response?.error?.extensions?.code?.also {
-            if (it == PdlErrorCode.SERVER_ERROR) throw RuntimeException(response.error.toString())
+            response?.error?.extensions?.code?.also {
+                throw when (it) {
+                    PdlErrorCode.NOT_FOUND -> PersonException.PersonIkkeFunnet(response.error.toString())
+                    PdlErrorCode.SERVER_ERROR -> PersonException.TekniskFeil(response.error.toString())
+                    PdlErrorCode.UNAUTHENTICATED -> PersonException.TekniskFeil(response.error.toString())
+                    PdlErrorCode.UNAUTHORIZED -> PersonException.TekniskFeil(response.error.toString())
+                    PdlErrorCode.BAD_REQUEST -> PersonException.TekniskFeil(response.error.toString())
+                }
+            }
+            response?.data?.hentPerson?.toDomain()
+        } catch (e: PersonException) {
+            throw e
+        } catch (e: Throwable) {
+            throw PersonException.TekniskFeil("${e.message}")
         }
-        return response?.data?.hentPerson?.toDomain()
     }
 }
 

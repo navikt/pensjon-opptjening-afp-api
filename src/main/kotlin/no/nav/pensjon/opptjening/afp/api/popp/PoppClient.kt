@@ -3,6 +3,7 @@ package no.nav.pensjon.opptjening.afp.api.popp
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlag
+import no.nav.pensjon.opptjening.afp.api.domain.BeholdningException
 import no.nav.pensjon.opptjening.afp.api.domain.Inntekt
 import no.nav.pensjon.opptjening.afp.api.popp.dto.Beholdning
 import org.springframework.beans.factory.annotation.Qualifier
@@ -11,8 +12,11 @@ import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatusCode
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
+import org.springframework.web.client.HttpClientErrorException
 import pensjon.opptjening.azure.ad.client.TokenProvider
 import java.net.URI
 import java.time.LocalDate
@@ -34,27 +38,33 @@ class PoppClient(
         fraOgMed: Int,
         tilOgMed: Int,
     ): List<AFPBeholdningsgrunnlag> {
-        val content = BeregnPensjonsbeholdningRequest(
-            fnr = fnr,
-            fraOgMed = fraOgMed,
-            tilOgMed = tilOgMed,
-        )
-        val response = restTemplate.exchange(
-            URI.create("$baseUrl/beholdning/beregn"),
-            HttpMethod.POST,
-            HttpEntity(
-                objectMapper.writeValueAsString(content),
-                HttpHeaders().apply {
-                    add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                    add(HttpHeaders.AUTHORIZATION, "Bearer ${tokenProvider.getToken()}")
-                }
-            ),
-            String::class.java
-        )
+        return try {
+            val content = BeregnPensjonsbeholdningRequest(
+                fnr = fnr,
+                fraOgMed = fraOgMed,
+                tilOgMed = tilOgMed,
+            )
+            val response = restTemplate.exchange(
+                URI.create("$baseUrl/beholdning/beregn"),
+                HttpMethod.POST,
+                HttpEntity(
+                    objectMapper.writeValueAsString(content),
+                    HttpHeaders().apply {
+                        add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        add(HttpHeaders.AUTHORIZATION, "Bearer ${tokenProvider.getToken()}")
+                    }
+                ),
+                String::class.java
+            )
 
-        val mapped: List<Beholdning> = objectMapper.readValue(response.body!!)
+            val mapped: List<Beholdning> = objectMapper.readValue(response.body!!)
 
-        return mapped.map { pensjonsbeholdning -> pensjonsbeholdning.toDomain() }
+            mapped.map { pensjonsbeholdning -> pensjonsbeholdning.toDomain() }
+        } catch (e: HttpClientErrorException) {
+            throw handleHttpClientErrors(e)
+        } catch (e: Throwable) {
+            throw BeholdningException.TekniskFeil(e.message)
+        }
     }
 
     fun simulerPensjonsbeholdning(
@@ -63,28 +73,50 @@ class PoppClient(
         tilOgMed: Int,
         inntekter: List<Inntekt>
     ): List<AFPBeholdningsgrunnlag> {
-        val content = SimulerPensjonsbeholdningRequest(
-            fnr = fnr,
-            fraOgMed = fraOgMed,
-            tilOgMed = tilOgMed,
-            inntekter = inntekter.map { it.toDto(fnr) },
-        )
-        val response = restTemplate.exchange(
-            URI.create("$baseUrl/beholdning/simuler"),
-            HttpMethod.POST,
-            HttpEntity(
-                objectMapper.writeValueAsString(content),
-                HttpHeaders().apply {
-                    add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                    add(HttpHeaders.AUTHORIZATION, "Bearer ${tokenProvider.getToken()}")
-                }
-            ),
-            String::class.java
-        )
+        return try {
+            val content = SimulerPensjonsbeholdningRequest(
+                fnr = fnr,
+                fraOgMed = fraOgMed,
+                tilOgMed = tilOgMed,
+                inntekter = inntekter.map { it.toDto(fnr) },
+            )
+            val response = restTemplate.exchange(
+                URI.create("$baseUrl/beholdning/simuler"),
+                HttpMethod.POST,
+                HttpEntity(
+                    objectMapper.writeValueAsString(content),
+                    HttpHeaders().apply {
+                        add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        add(HttpHeaders.AUTHORIZATION, "Bearer ${tokenProvider.getToken()}")
+                    }
+                ),
+                String::class.java
+            )
 
-        val mapped: List<Beholdning> = objectMapper.readValue(response.body!!)
+            val mapped: List<Beholdning> = objectMapper.readValue(response.body!!)
 
-        return mapped.map { pensjonsbeholdning -> pensjonsbeholdning.toDomain() }
+            mapped.map { pensjonsbeholdning -> pensjonsbeholdning.toDomain() }
+        } catch (e: HttpClientErrorException) {
+            throw handleHttpClientErrors(e)
+        } catch (e: Throwable) {
+            throw BeholdningException.TekniskFeil(e.message)
+        }
+    }
+
+    private fun handleHttpClientErrors(e: HttpClientErrorException): BeholdningException {
+        return when (e.statusCode) {
+            HttpStatus.NOT_FOUND -> {
+                BeholdningException.PersonIkkeFunnet(e.message)
+            }
+
+            HttpStatus.BAD_REQUEST -> {
+                BeholdningException.UgyldigInput(e.message)
+            }
+
+            else -> {
+                BeholdningException.TekniskFeil(e.message)
+            }
+        }
     }
 }
 
@@ -92,7 +124,7 @@ private data class BeregnPensjonsbeholdningRequest(
     val fnr: String,
     val fraOgMed: Int,
     val tilOgMed: Int,
-){
+) {
     val beregnUtenUttakAP = true
 }
 

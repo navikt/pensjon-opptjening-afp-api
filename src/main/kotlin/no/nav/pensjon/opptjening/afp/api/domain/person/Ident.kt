@@ -1,4 +1,4 @@
-package no.nav.pensjon.opptjening.afp.api.domain
+package no.nav.pensjon.opptjening.afp.api.domain.person
 
 sealed class Ident {
     abstract val ident: String

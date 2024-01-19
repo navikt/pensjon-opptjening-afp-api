@@ -2,7 +2,7 @@ package no.nav.pensjon.opptjening.afp.api.service
 
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlag
 import no.nav.pensjon.opptjening.afp.api.domain.Inntekt
-import no.nav.pensjon.opptjening.afp.api.domain.Person
+import no.nav.pensjon.opptjening.afp.api.domain.person.Person
 import no.nav.pensjon.opptjening.afp.api.pdl.PdlClient
 import no.nav.pensjon.opptjening.afp.api.popp.PoppClient
 import org.springframework.stereotype.Service

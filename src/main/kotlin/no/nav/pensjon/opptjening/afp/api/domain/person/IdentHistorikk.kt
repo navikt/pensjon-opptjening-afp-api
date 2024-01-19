@@ -1,4 +1,4 @@
-package no.nav.pensjon.opptjening.afp.api.domain
+package no.nav.pensjon.opptjening.afp.api.domain.person
 
 class IdentHistorikk(
     private val identer: Set<Ident.FolkeregisterIdent>

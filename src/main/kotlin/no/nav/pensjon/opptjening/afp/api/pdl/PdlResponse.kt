@@ -1,9 +1,10 @@
 package no.nav.pensjon.opptjening.afp.api.pdl
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import no.nav.pensjon.opptjening.afp.api.domain.Ident
-import no.nav.pensjon.opptjening.afp.api.domain.IdentHistorikk
-import no.nav.pensjon.opptjening.afp.api.domain.Person
+import no.nav.pensjon.opptjening.afp.api.domain.person.Ident
+import no.nav.pensjon.opptjening.afp.api.domain.person.IdentHistorikk
+import no.nav.pensjon.opptjening.afp.api.domain.person.Person
+import no.nav.pensjon.opptjening.afp.api.domain.person.PersonException
 import java.time.LocalDateTime
 
 internal data class PdlResponse(
@@ -29,7 +30,7 @@ internal data class HentPersonQueryResponse(
     private fun fødselsår(): Int {
         return when (foedsel.size) {
             0 -> {
-                throw RuntimeException("Fødselsår finnes ikke i respons fra pdl")
+                throw PersonException.FantIkkeFødselsinformasjon("Fødselsår finnes ikke i respons fra pdl")
             }
 
             1 -> {
@@ -37,7 +38,7 @@ internal data class HentPersonQueryResponse(
             }
 
             else -> {
-                foedsel.avklarFoedsel()?.foedselsaar ?: throw RuntimeException("Fødselsår finnes ikke i respons fra pdl")
+                foedsel.avklarFoedsel()?.foedselsaar ?: throw PersonException.FantIkkeFødselsinformasjon("Fødselsår finnes ikke i respons fra pdl")
             }
         }
     }

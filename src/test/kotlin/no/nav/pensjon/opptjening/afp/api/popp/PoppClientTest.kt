@@ -4,10 +4,12 @@ import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension
 import no.nav.pensjon.opptjening.afp.api.Application
+import no.nav.pensjon.opptjening.afp.api.domain.BeholdningException
 import no.nav.security.token.support.spring.test.EnableMockOAuth2Server
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.RegisterExtension
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -90,6 +92,66 @@ class PoppClientTest {
                 assertThat(it.fraOgMedDato).isEqualTo(LocalDate.of(2024, Month.JANUARY, 1))
                 assertThat(it.tilOgMedDato).isNull()
             }
+        }
+    }
+
+    @Test
+    fun `kaster person ikke funnet hvis POPP svarer med 404`(){
+        wiremock.givenThat(
+            WireMock.post(WireMock.urlPathEqualTo("/api/beholdning/beregn"))
+                .willReturn(
+                    WireMock.notFound()
+                        .withBody("""
+                            {
+                                "message":"Fant ikke person"
+                            }
+                        """.trimIndent())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                )
+        )
+
+        assertThrows<BeholdningException.PersonIkkeFunnet> {
+            client.beregnPensjonsbeholdning("tjafs", 2023, 2023)
+        }
+    }
+
+    @Test
+    fun `kaster ugyldig input hvis POPP svarer med 400`(){
+        wiremock.givenThat(
+            WireMock.post(WireMock.urlPathEqualTo("/api/beholdning/beregn"))
+                .willReturn(
+                    WireMock.badRequest()
+                        .withBody("""
+                            {
+                                "message":"Ugyldig input"
+                            }
+                        """.trimIndent())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                )
+        )
+
+        assertThrows<BeholdningException.UgyldigInput> {
+            client.beregnPensjonsbeholdning("tjafs", 2023, 2023)
+        }
+    }
+
+    @Test
+    fun `kaster teknisk feil hvis POPP svarer med 500`(){
+        wiremock.givenThat(
+            WireMock.post(WireMock.urlPathEqualTo("/api/beholdning/beregn"))
+                .willReturn(
+                    WireMock.serverError()
+                        .withBody("""
+                            {
+                                "message":"Ugyldig input"
+                            }
+                        """.trimIndent())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                )
+        )
+
+        assertThrows<BeholdningException.TekniskFeil> {
+            client.beregnPensjonsbeholdning("tjafs", 2023, 2023)
         }
     }
 }
