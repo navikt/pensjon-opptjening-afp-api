@@ -30,6 +30,11 @@ spec:
   ingresses:
     - https://pensjon-opptjening-afp-api.intern.dev.nav.no
   accessPolicy:
+    inbound:
+      rules:
+        - application: tjenestepensjon-simulering
+          namespace: pensjonskalkulator
+          cluster: dev-fss
     outbound:
       external:
         - host: pensjon-popp-q2.dev-fss-pub.nais.io
