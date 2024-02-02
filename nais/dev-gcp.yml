@@ -18,15 +18,15 @@ spec:
     - name: PDL_API_ID
       value: dev-fss.pdl.pdl-api
   azure:
-    sidecar:
-      enabled: true
-      autoLogin: true
+#    sidecar:
+#      enabled: true
+#      autoLogin: true
     application:
       enabled: true
       allowAllUsers: false
-      claims:
-        groups:
-          - id: "7ef907b4-ec9f-47dd-ab41-4e54ba32ceb1" #AAD pensjonopptjening testgruppe
+#      claims:
+#        groups:
+#          - id: "7ef907b4-ec9f-47dd-ab41-4e54ba32ceb1" #AAD pensjonopptjening testgruppe
   ingresses:
     - https://pensjon-opptjening-afp-api.intern.dev.nav.no
   accessPolicy:
