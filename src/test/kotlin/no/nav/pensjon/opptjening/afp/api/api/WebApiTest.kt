@@ -6,14 +6,11 @@ import no.nav.pensjon.opptjening.afp.api.domain.BeholdningException
 import no.nav.pensjon.opptjening.afp.api.domain.person.PersonException
 import no.nav.pensjon.opptjening.afp.api.service.AFPBeholdningsgrunnlagService
 import no.nav.security.mock.oauth2.MockOAuth2Server
-import no.nav.security.mock.oauth2.http.get
 import no.nav.security.mock.oauth2.token.DefaultOAuth2TokenCallback
 import no.nav.security.token.support.spring.test.EnableMockOAuth2Server
 import org.junit.jupiter.api.Test
-import org.mockito.BDDMockito.anyString
 import org.mockito.BDDMockito.given
 import org.mockito.kotlin.any
-import org.mockito.kotlin.whenever
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -66,16 +63,23 @@ class WebApiTest {
 
     @Test
     fun `svarer med 404 for dersom person ikke eksister i PDL`() {
-        given(service.beregnAFPBeholdingsgrunnlag(any(), any())).willThrow(PersonException.PersonIkkeFunnet("fant ikke"))
+        given(
+            service.beregnAFPBeholdingsgrunnlag(
+                any(),
+                any()
+            )
+        ).willThrow(PersonException.PersonIkkeFunnet("fant ikke"))
 
         mvc.perform(
             post("/api/beregn")
-                .content("""
+                .content(
+                    """
                     {
                         "personId":"1234",
                         "fraOgMedDato":"2023-01-01"
                     }
-                """.trimIndent())
+                """.trimIndent()
+                )
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .header(HttpHeaders.AUTHORIZATION, tokenString("azure", "pensjon-opptjening-afp-api"))
         )
@@ -85,21 +89,57 @@ class WebApiTest {
 
     @Test
     fun `svarer med 400 for dersom input til POPP er ugyldig`() {
-        given(service.beregnAFPBeholdingsgrunnlag(any(), any())).willThrow(BeholdningException.UgyldigInput("ugyldig input"))
+        given(
+            service.beregnAFPBeholdingsgrunnlag(
+                any(),
+                any()
+            )
+        ).willThrow(BeholdningException.UgyldigInput("ugyldig input"))
 
         mvc.perform(
             post("/api/beregn")
-                .content("""
+                .content(
+                    """
                     {
                         "personId":"1234",
                         "fraOgMedDato":"2023-01-01"
                     }
-                """.trimIndent())
+                """.trimIndent()
+                )
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .header(HttpHeaders.AUTHORIZATION, tokenString("azure", "pensjon-opptjening-afp-api"))
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().json("""{"message":"Ugyldig input"}"""))
+    }
+
+    @Test
+    fun `svarer med 400 for dersom input til API er ugyldig`() {
+        mvc.perform(
+            post("/api/simuler")
+                .content(
+                    """
+                    {
+                        "personId":"1234",
+                        "fraOgMedDato":"2023-01-01",
+                        "fremtidigInntektListe": [
+                            {
+                                "arligInntekt": 1000,
+                                "fraOgMedDato": "2023-01-01"
+                            },
+                            {
+                                "arligInntekt": 2000,
+                                "fraOgMedDato": "2023-01-01"
+                            }
+                        ]
+                    }
+                """.trimIndent()
+                )
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .header(HttpHeaders.AUTHORIZATION, tokenString("azure", "pensjon-opptjening-afp-api"))
+        )
+            .andExpect(status().isBadRequest)
+            .andExpect(content().json("""{"message":"fremtidigInntektListe har flere verdier for fraOgMedDato: 2023-01-01"}"""))
     }
 
     @Test
@@ -142,17 +182,14 @@ class WebApiTest {
 
         val expected = """
                 {  
-                    "personId":"1234",
-                    "afpGrunnlagBeholdninger": [
+                    "pensjonsBeholdningsPeriodeListe": [
                      {
                         "fraOgMedDato":"2023-01-01",
-                        "tilOgMedDato":"2023-04-30",
-                        "beholdning":5000
+                        "pensjonsBeholdning":5000
                      },
                      {
                         "fraOgMedDato":"2023-05-01",
-                        "tilOgMedDato":"2023-12-31",
-                        "beholdning":5500
+                        "pensjonsBeholdning":5500
                      }
                     ]                    
                 }

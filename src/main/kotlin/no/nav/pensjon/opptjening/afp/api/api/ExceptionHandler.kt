@@ -1,13 +1,16 @@
 package no.nav.pensjon.opptjening.afp.api.api
 
+import no.nav.pensjon.opptjening.afp.api.api.model.UgyldigApiRequestException
 import no.nav.pensjon.opptjening.afp.api.domain.BeholdningException
 import no.nav.pensjon.opptjening.afp.api.domain.person.PersonException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatusCode
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.context.request.WebRequest
@@ -92,6 +95,35 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
             }
         }
     }
+
+    @ExceptionHandler(value = [UgyldigApiRequestException::class])
+    fun handle(ex: UgyldigApiRequestException, request: WebRequest): ResponseEntity<Any>? {
+        logExeption(ex)
+        return handleExceptionInternal(
+            ex,
+            ExceptionBody(ex.message!!),
+            HttpHeaders().apply { contentType = MediaType.APPLICATION_JSON },
+            HttpStatus.BAD_REQUEST,
+            request
+        )
+    }
+
+    /**
+     * Override slik at requester kan bygge inn sin egen validering i init-funksjonen.
+     */
+    override fun handleHttpMessageNotReadable(
+        ex: HttpMessageNotReadableException,
+        headers: HttpHeaders,
+        status: HttpStatusCode,
+        request: WebRequest
+    ): ResponseEntity<Any>? {
+        return if (ex.rootCause is UgyldigApiRequestException) {
+            handle(ex.rootCause as UgyldigApiRequestException, request)
+        } else {
+            super.handleHttpMessageNotReadable(ex, headers, status, request)
+        }
+    }
+
 
     @ExceptionHandler(value = [Exception::class])
     fun logAndHandleException(ex: Exception, request: WebRequest): ResponseEntity<Any>? {

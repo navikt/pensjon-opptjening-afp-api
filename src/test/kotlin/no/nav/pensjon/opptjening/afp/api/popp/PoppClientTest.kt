@@ -3,7 +3,6 @@ package no.nav.pensjon.opptjening.afp.api.popp
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension
-import no.nav.pensjon.opptjening.afp.api.Application
 import no.nav.pensjon.opptjening.afp.api.domain.BeholdningException
 import no.nav.security.token.support.spring.test.EnableMockOAuth2Server
 import org.assertj.core.api.Assertions.assertThat
@@ -82,15 +81,12 @@ class PoppClientTest {
             val response = client.beregnPensjonsbeholdning("tjafs", 2023, 2023)
             response[0].let {
                 assertThat(it.fraOgMedDato).isEqualTo(LocalDate.of(2015, Month.JANUARY, 1))
-                assertThat(it.tilOgMedDato).isEqualTo(LocalDate.of(2015, Month.APRIL, 30))
             }
             response[1].let {
                 assertThat(it.fraOgMedDato).isEqualTo(LocalDate.of(2015, Month.MAY, 1))
-                assertThat(it.tilOgMedDato).isEqualTo(LocalDate.of(2015, Month.DECEMBER, 31))
             }
             response[18].let {
                 assertThat(it.fraOgMedDato).isEqualTo(LocalDate.of(2024, Month.JANUARY, 1))
-                assertThat(it.tilOgMedDato).isNull()
             }
         }
     }

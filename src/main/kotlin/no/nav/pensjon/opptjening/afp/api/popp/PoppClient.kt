@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlag
 import no.nav.pensjon.opptjening.afp.api.domain.BeholdningException
-import no.nav.pensjon.opptjening.afp.api.domain.Inntekt
+import no.nav.pensjon.opptjening.afp.api.domain.ÅrligInntekt
 import no.nav.pensjon.opptjening.afp.api.popp.dto.Beholdning
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
@@ -13,7 +13,6 @@ import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatusCode
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.client.HttpClientErrorException
@@ -71,14 +70,14 @@ class PoppClient(
         fnr: String,
         fraOgMed: Int,
         tilOgMed: Int,
-        inntekter: List<Inntekt>
+        inntekter: List<ÅrligInntekt>
     ): List<AFPBeholdningsgrunnlag> {
         return try {
             val content = SimulerPensjonsbeholdningRequest(
                 fnr = fnr,
                 fraOgMed = fraOgMed,
                 tilOgMed = tilOgMed,
-                inntekter = inntekter.map { it.toDto(fnr) },
+                inntekter = inntekter.toDto(fnr),
             )
             val response = restTemplate.exchange(
                 URI.create("$baseUrl/beholdning/simuler"),
@@ -135,19 +134,24 @@ private data class SimulerPensjonsbeholdningRequest(
     val inntekter: List<PoppInntekt>,
 )
 
-private fun Inntekt.toDto(fnr: String): PoppInntekt {
+private fun List<ÅrligInntekt>.toDto(fnr: String): List<PoppInntekt> {
+    return map { it.toDto(fnr) }
+}
+
+private fun ÅrligInntekt.toDto(fnr: String): PoppInntekt {
     return PoppInntekt(
         changeStamp = null,
         inntektId = null,
         fnr = fnr,
-        inntektAr = inntektAr,
+        inntektAr = år,
         kilde = "NAV",
         kommune = null,
         piMerke = null,
         inntektType = "SUM_PI",
-        belop = belop.toLong()
+        belop = inntekt.toLong()
     )
 }
+
 
 private fun Beholdning.toDomain(): AFPBeholdningsgrunnlag {
     val tz = ZoneId.of("Europe/Oslo")

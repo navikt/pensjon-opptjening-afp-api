@@ -25,9 +25,8 @@ class WebApi(
     ): ResponseEntity<BeregnAFPBeholdningsgrunnlagResponse> {
         //TODO hvordan håndtere ugyldig input - f.eks inntekter etter 61 år?
         return ResponseEntity.ok(
-            BeregnAFPBeholdningsgrunnlagResponse(
-                personId = request.personId,
-                afpGrunnlagBeholdninger = service.beregnAFPBeholdingsgrunnlag(
+            BeregnAFPBeholdningsgrunnlagResponse.of(
+                service.beregnAFPBeholdingsgrunnlag(
                     fnr = request.personId,
                     beholdningFraOgMed = request.fraOgMedDato
                 )
@@ -41,12 +40,11 @@ class WebApi(
     ): ResponseEntity<SimulerAFPBeholdningsgrunnlagResponse> {
         //TODO hvordan håndtere ugyldig input - f.eks inntekter etter 61 år?
         return ResponseEntity.ok(
-            SimulerAFPBeholdningsgrunnlagResponse(
-                personId = request.personId,
-                afpGrunnlagBeholdninger = service.simulerAFPBeholdningsgrunnlag(
+            SimulerAFPBeholdningsgrunnlagResponse.of(
+                service.simulerAFPBeholdningsgrunnlag(
                     fnr = request.personId,
                     beholdningFraOgMed = request.fraOgMedDato,
-                    inntekter = request.inntekter,
+                    fremtidigeInntekter = request.fremtidigeInntekter,
                 )
             )
         )

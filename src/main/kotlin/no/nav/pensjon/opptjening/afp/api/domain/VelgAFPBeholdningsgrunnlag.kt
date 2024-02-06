@@ -8,7 +8,7 @@ class VelgAFPBeholdningsgrunnlag(
 ) {
     private val sorted = beholdninger.sortedBy { it.fraOgMedDato }
 
-    fun get(): List<AFPBeholdningsgrunnlag>{
+    fun get(): List<AFPBeholdningsgrunnlag> {
         return sorted.filter { it.tilOgMedDato == null || it.tilOgMedDato >= fraOgMed }
     }
 }

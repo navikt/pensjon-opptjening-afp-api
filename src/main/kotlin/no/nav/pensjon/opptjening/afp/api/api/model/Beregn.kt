@@ -9,6 +9,18 @@ data class BeregnAFPBeholdningsgrunnlagRequest(
 )
 
 data class BeregnAFPBeholdningsgrunnlagResponse(
-    val personId: String,
-    val afpGrunnlagBeholdninger: List<AFPBeholdningsgrunnlag>
-)
+    val pensjonsBeholdningsPeriodeListe: List<PensjonsBeholdningsPeriode>
+) {
+    companion object {
+        fun of(afpBeholdningsgrunnlag: List<AFPBeholdningsgrunnlag>): BeregnAFPBeholdningsgrunnlagResponse {
+            return BeregnAFPBeholdningsgrunnlagResponse(
+                afpBeholdningsgrunnlag.map {
+                    PensjonsBeholdningsPeriode(
+                        fraOgMedDato = it.fraOgMedDato,
+                        pensjonsBeholdning = it.beholdning,
+                    )
+                }
+            )
+        }
+    }
+}
