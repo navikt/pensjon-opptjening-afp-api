@@ -38,25 +38,7 @@ class AFPBeholdningsgrunnlagServiceTest {
     }
 
     @Test
-    fun `beregner pensjonsbeholdning fra og med fødsel til og med ønsket fraOgMed dersom denne er tidligere enn 61e opptjeningsår (alder 63)`() {
-        mockPerson()
-        mockTomPensjonsbeholdningResponse()
-
-        service.beregnAFPBeholdingsgrunnlag(
-            fnr = "1",
-            beholdningFraOgMed = LocalDate.of(2050, Month.JANUARY, 1)
-        )
-
-        verify(personoppslag).hent("1")
-        verify(pensjonsbeholdning).beregn(
-            fnr = eq("12345678910"),
-            fraOgMed = eq(2000),
-            tilOgMed = eq(2048)
-        )
-    }
-
-    @Test
-    fun `beregner pensjonsbeholdning fra og med fødsel til og brukers 61e opptjeningsår (alder 63) dersom fraOgMed er senere enn 61e opptjeningsår`() {
+    fun `beregner pensjonsbeholdning fra og med fødsel til og brukers 61e opptjeningsår (alder 63)`() {
         mockPerson()
         mockTomPensjonsbeholdningResponse()
 
@@ -74,34 +56,7 @@ class AFPBeholdningsgrunnlagServiceTest {
     }
 
     @Test
-    fun `simulerer pensjonsbeholdning fra og med fødsel til og med ønsket fraOgMed dersom denne er tidligere enn 61e opptjeningsår (alder 63)`() {
-        mockPerson()
-        mockTomPensjonsbeholdningResponse()
-
-        val fremtidigInntekt = FremtidigeInntekter(
-            listOf(
-                FremtidigInntekt(YearMonth.of(2020, Month.JANUARY), 100_000)
-            )
-        )
-
-
-        service.simulerAFPBeholdningsgrunnlag(
-            fnr = "1",
-            beholdningFraOgMed = LocalDate.of(2050, Month.JANUARY, 1),
-            fremtidigeInntekter = fremtidigInntekt
-        )
-
-        verify(personoppslag).hent("1")
-        verify(pensjonsbeholdning).simuler(
-            fnr = eq("12345678910"),
-            fraOgMed = eq(2000),
-            tilOgMed = eq(2048),
-            inntekter = eq(fremtidigInntekt.årligInntekt(2048))
-        )
-    }
-
-    @Test
-    fun `simulerer pensjonsbeholdning fra og med fødsel til og brukers 61e opptjeningsår (alder 63) dersom fraOgMed er senere enn 61e opptjeningsår`() {
+    fun `simulerer pensjonsbeholdning fra og med fødsel til og brukers 61e opptjeningsår (alder 63)`() {
         mockPerson()
         mockTomPensjonsbeholdningResponse()
 

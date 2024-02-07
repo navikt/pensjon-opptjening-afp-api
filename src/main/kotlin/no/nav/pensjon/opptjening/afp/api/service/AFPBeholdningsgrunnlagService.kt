@@ -1,7 +1,6 @@
 package no.nav.pensjon.opptjening.afp.api.service
 
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlag
-import no.nav.pensjon.opptjening.afp.api.domain.Aldersbegrensning61År
 import no.nav.pensjon.opptjening.afp.api.domain.BeholdningsAr
 import no.nav.pensjon.opptjening.afp.api.domain.FremtidigeInntekter
 import no.nav.pensjon.opptjening.afp.api.domain.Pensjonsbeholdning
@@ -22,11 +21,10 @@ class AFPBeholdningsgrunnlagService(
         beholdningFraOgMed: LocalDate,
     ): List<AFPBeholdningsgrunnlag> {
         val person = hentPerson(fnr)
-        val tilOgMed = begrensTil61ÅrOpptjening(beholdningFraOgMed, person)
         val beholdninger = pensjonsbeholdning.beregn(
             fnr = person.fnr,
             fraOgMed = person.fødselsÅr,
-            tilOgMed = tilOgMed,
+            tilOgMed = person.sekstiFørsteÅr,
         )
         return VelgAFPBeholdningsgrunnlag(
             fraOgMed = beholdningFraOgMed,
@@ -40,7 +38,7 @@ class AFPBeholdningsgrunnlagService(
         fremtidigeInntekter: FremtidigeInntekter
     ): List<AFPBeholdningsgrunnlag> {
         val person = hentPerson(fnr)
-        val tilOgMed = begrensTil61ÅrOpptjening(beholdningFraOgMed, person)
+        val tilOgMed = person.sekstiFørsteÅr
         val årligInntekt = fremtidigeInntekter.årligInntekt(tilOgMed = tilOgMed)
         val beholdninger = pensjonsbeholdning.simuler(
             fnr = person.fnr,
@@ -52,16 +50,6 @@ class AFPBeholdningsgrunnlagService(
             fraOgMed = beholdningFraOgMed,
             beholdninger = beholdninger
         ).get()
-    }
-
-    private fun begrensTil61ÅrOpptjening(
-        beholdningFraOgMed: LocalDate,
-        person: Person
-    ): Int {
-        val beholdningÅr = BeholdningsAr(beholdningFraOgMed.year)
-        val opptjeningsÅr = beholdningÅr.opptjeningsAr()
-        val tilOgMed = Aldersbegrensning61År.begrens(person, opptjeningsÅr.ar)
-        return tilOgMed
     }
 
     private fun hentPerson(fnr: String): Person {
