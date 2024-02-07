@@ -4,18 +4,18 @@ import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlag
 import no.nav.pensjon.opptjening.afp.api.domain.Aldersbegrensning61År
 import no.nav.pensjon.opptjening.afp.api.domain.BeholdningsAr
 import no.nav.pensjon.opptjening.afp.api.domain.FremtidigeInntekter
+import no.nav.pensjon.opptjening.afp.api.domain.Pensjonsbeholdning
+import no.nav.pensjon.opptjening.afp.api.domain.person.Personoppslag
 import no.nav.pensjon.opptjening.afp.api.domain.VelgAFPBeholdningsgrunnlag
 import no.nav.pensjon.opptjening.afp.api.domain.person.Person
 import no.nav.pensjon.opptjening.afp.api.domain.person.PersonException
-import no.nav.pensjon.opptjening.afp.api.pdl.PdlClient
-import no.nav.pensjon.opptjening.afp.api.popp.PoppClient
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
 @Service
 class AFPBeholdningsgrunnlagService(
-    private val poppClient: PoppClient,
-    private val pdlClient: PdlClient,
+    private val pensjonsbeholdning: Pensjonsbeholdning,
+    private val personoppslag: Personoppslag,
 ) {
     fun beregnAFPBeholdingsgrunnlag(
         fnr: String,
@@ -23,8 +23,8 @@ class AFPBeholdningsgrunnlagService(
     ): List<AFPBeholdningsgrunnlag> {
         val person = hentPerson(fnr)
         val tilOgMed = begrensTil61ÅrOpptjening(beholdningFraOgMed, person)
-        val beholdninger = poppClient.beregnPensjonsbeholdning(
-            fnr = fnr,
+        val beholdninger = pensjonsbeholdning.beregn(
+            fnr = person.fnr,
             fraOgMed = person.fødselsÅr,
             tilOgMed = tilOgMed,
         )
@@ -41,9 +41,9 @@ class AFPBeholdningsgrunnlagService(
     ): List<AFPBeholdningsgrunnlag> {
         val person = hentPerson(fnr)
         val tilOgMed = begrensTil61ÅrOpptjening(beholdningFraOgMed, person)
-        val årligInntekt = fremtidigeInntekter.årligInntekt(tilOgMed = person.fødselsÅr)
-        val beholdninger = poppClient.simulerPensjonsbeholdning(
-            fnr = fnr,
+        val årligInntekt = fremtidigeInntekter.årligInntekt(tilOgMed = tilOgMed)
+        val beholdninger = pensjonsbeholdning.simuler(
+            fnr = person.fnr,
             fraOgMed = person.fødselsÅr,
             tilOgMed = tilOgMed,
             inntekter = årligInntekt,
@@ -65,6 +65,6 @@ class AFPBeholdningsgrunnlagService(
     }
 
     private fun hentPerson(fnr: String): Person {
-        return pdlClient.hentPerson(fnr) ?: throw PersonException.PersonIkkeFunnet("Fant ikke person")
+        return personoppslag.hent(fnr) ?: throw PersonException.PersonIkkeFunnet("Fant ikke person")
     }
 }

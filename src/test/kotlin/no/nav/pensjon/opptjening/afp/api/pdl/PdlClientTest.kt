@@ -42,7 +42,7 @@ class PdlClientTest {
         )
 
         assertDoesNotThrow {
-            val response = client.hentPerson("tjafs")!!
+            val response = client.hent("tjafs")!!
             assertThat(response.fnr).isEqualTo("12345678910")
             assertThat(response.fødselsÅr).isEqualTo(2000)
         }
@@ -76,7 +76,7 @@ class PdlClientTest {
         )
 
         assertThrows<PersonException.PersonIkkeFunnet> {
-            client.hentPerson("tjafs")
+            client.hent("tjafs")
         }
     }
 
@@ -108,7 +108,7 @@ class PdlClientTest {
         )
 
         assertThrows<PersonException.TekniskFeil> {
-            client.hentPerson("tjafs")
+            client.hent("tjafs")
         }
     }
 
@@ -135,7 +135,7 @@ class PdlClientTest {
         )
 
         assertThrows<PersonException.FantIkkeFødselsinformasjon> {
-            client.hentPerson("tjafs")
+            client.hent("tjafs")
         }
     }
 }

@@ -1,5 +1,6 @@
 package no.nav.pensjon.opptjening.afp.api.pdl
 
+import no.nav.pensjon.opptjening.afp.api.domain.person.Personoppslag
 import no.nav.pensjon.opptjening.afp.api.domain.person.Person
 import no.nav.pensjon.opptjening.afp.api.domain.person.PersonException
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,12 +21,12 @@ import java.util.UUID
 class PdlClient(
     @Value("\${PDL_URL}") private val pdlUrl: String,
     @Qualifier("pdlTokenProvider") private val tokenProvider: TokenProvider,
-) {
+): Personoppslag {
     @Autowired
     private lateinit var graphqlQuery: GraphqlQuery
     private val restTemplate = RestTemplateBuilder().build()
 
-    fun hentPerson(fnr: String): Person? {
+    override fun hent(fnr: String): Person? {
         return try {
             val entity = RequestEntity<PdlQuery>(
                 PdlQuery(graphqlQuery.hentPersonQuery(), FnrVariables(ident = fnr)),

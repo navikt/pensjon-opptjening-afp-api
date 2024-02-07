@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlag
 import no.nav.pensjon.opptjening.afp.api.domain.BeholdningException
+import no.nav.pensjon.opptjening.afp.api.domain.Pensjonsbeholdning
 import no.nav.pensjon.opptjening.afp.api.domain.ÅrligInntekt
 import no.nav.pensjon.opptjening.afp.api.popp.dto.Beholdning
 import org.springframework.beans.factory.annotation.Qualifier
@@ -23,16 +24,16 @@ import java.time.ZoneId
 import no.nav.pensjon.opptjening.afp.api.popp.dto.Inntekt as PoppInntekt
 
 @Component
-class PoppClient(
+internal class PoppClient(
     @Value("\${POPP_URL}") private val baseUrl: String,
     @Qualifier("poppTokenProvider") private val tokenProvider: TokenProvider,
     private val objectMapper: ObjectMapper,
-) {
+): Pensjonsbeholdning {
     private val restTemplate = RestTemplateBuilder()
         .rootUri(baseUrl)
         .build()
 
-    fun beregnPensjonsbeholdning(
+    override fun beregn(
         fnr: String,
         fraOgMed: Int,
         tilOgMed: Int,
@@ -66,7 +67,7 @@ class PoppClient(
         }
     }
 
-    fun simulerPensjonsbeholdning(
+    override fun simuler(
         fnr: String,
         fraOgMed: Int,
         tilOgMed: Int,
