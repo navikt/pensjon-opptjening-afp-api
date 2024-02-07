@@ -7,6 +7,7 @@ import no.nav.pensjon.opptjening.afp.api.domain.BeholdningException
 import no.nav.pensjon.opptjening.afp.api.domain.Pensjonsbeholdning
 import no.nav.pensjon.opptjening.afp.api.domain.ÅrligInntekt
 import no.nav.pensjon.opptjening.afp.api.popp.dto.Beholdning
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.client.RestTemplateBuilder
@@ -93,7 +94,11 @@ internal class PoppClient(
                 String::class.java
             )
 
+            LoggerFactory.getLogger(this::class.java).info("Request content: $content")
+
             val mapped: List<Beholdning> = objectMapper.readValue(response.body!!)
+
+            LoggerFactory.getLogger(this::class.java).info("Response content: $mapped")
 
             mapped.map { pensjonsbeholdning -> pensjonsbeholdning.toDomain() }
         } catch (e: HttpClientErrorException) {
