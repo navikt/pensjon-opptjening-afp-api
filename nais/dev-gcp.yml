@@ -35,6 +35,7 @@ spec:
         - application: tjenestepensjon-simulering
           namespace: pensjonskalkulator
           cluster: dev-fss
+        - application: pensjon-opptjening-afp-api
     outbound:
       external:
         - host: pensjon-popp-q2.dev-fss-pub.nais.io
