@@ -94,18 +94,9 @@ internal class PoppClient(
                 String::class.java
             )
 
-            LoggerFactory.getLogger(this::class.java).info("Request content: $content")
-
             val mapped: List<Beholdning> = objectMapper.readValue(response.body!!)
 
-            LoggerFactory.getLogger(this::class.java).info("Response content: $mapped")
-            LoggerFactory.getLogger(this::class.java).info("EMPTY STUFF")
-
-            val r = mapped.map { pensjonsbeholdning -> pensjonsbeholdning.toDomain() }
-
-            LoggerFactory.getLogger(this::class.java).info("Response content: $r")
-
-            r
+            mapped.map { pensjonsbeholdning -> pensjonsbeholdning.toDomain() }
         } catch (e: HttpClientErrorException) {
             throw handleHttpClientErrors(e)
         } catch (e: Throwable) {
