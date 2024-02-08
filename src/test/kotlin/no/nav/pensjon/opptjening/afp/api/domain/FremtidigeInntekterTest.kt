@@ -159,4 +159,38 @@ class FremtidigeInntekterTest {
         )
         assertThat(actual).isEqualTo(expected)
     }
+
+    @Test
+    fun `fremtidig inntekt kan veksle mellom 0 og andre verdier`() {
+        val actual = FremtidigeInntekter(
+            listOf(
+                FremtidigInntekt(måned = YearMonth.of(2022, Month.JANUARY), årligInntekt = 0),
+                FremtidigInntekt(måned = YearMonth.of(2022, Month.FEBRUARY), årligInntekt = 300000),
+                FremtidigInntekt(måned = YearMonth.of(2022, Month.MAY), årligInntekt = 0)
+            )
+        ).årligInntekt(tilOgMed = 2023)
+
+        val expected = listOf(
+            ÅrligInntekt(år = 2022, inntekt = 75000),
+            ÅrligInntekt(år = 2023, inntekt = 0),
+        )
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun `fremtidig inntekt kan være 0`() {
+        val actual = FremtidigeInntekter(
+            listOf(
+                FremtidigInntekt(måned = YearMonth.of(2022, Month.JANUARY), årligInntekt = 0),
+                FremtidigInntekt(måned = YearMonth.of(2022, Month.FEBRUARY), årligInntekt = 0),
+                FremtidigInntekt(måned = YearMonth.of(2022, Month.MAY), årligInntekt = 0)
+            )
+        ).årligInntekt(tilOgMed = 2023)
+
+        val expected = listOf(
+            ÅrligInntekt(år = 2022, inntekt = 0),
+            ÅrligInntekt(år = 2023, inntekt = 0),
+        )
+        assertThat(actual).isEqualTo(expected)
+    }
 }
