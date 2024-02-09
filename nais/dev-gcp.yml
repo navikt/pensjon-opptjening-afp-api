@@ -32,7 +32,7 @@ spec:
     enabled: true
     scopes:
       exposes:
-        - name: { { SCOPE_BEREGN_READ_EKSTERN } } #nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.beregn.read
+        - name: ekstern.afp.beholdningsgrunnlag.beregn.read #nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.beregn.read
           enabled: true
           product: pensjonopptjening
           consumers:
@@ -44,7 +44,7 @@ spec:
               orgno: 982583462
             - name: STOREBRAND
               orgno: 931936492
-        - name: { { SCOPE_SIMULER_READ_EKSTERN } }  #nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.simuler.read
+        - name: ekstern.afp.beholdningsgrunnlag.simuler.read  #nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.simuler.read
           enabled: true
           product: pensjonopptjening
           consumers:
@@ -66,12 +66,12 @@ spec:
           cluster: dev-fss
           permissions:
             scopes:
-              - { { SCOPE_SIMULER_READ } }
+              - afp.beholdningsgrunnlag.beregn.read
         - application: pensjon-opptjening-afp-api
           permissions:
             scopes:
-              - { { SCOPE_BEREGN_READ } }
-              - { { SCOPE_SIMULER_READ } }
+              - afp.beholdningsgrunnlag.beregn.read
+              - afp.beholdningsgrunnlag.simuler.read
     outbound:
       external:
         - host: pensjon-popp-q2.dev-fss-pub.nais.io
