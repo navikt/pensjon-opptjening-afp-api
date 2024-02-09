@@ -20,11 +20,11 @@ spec:
     - name: SCOPE_BEREGN_READ
       value: afp.beholdningsgrunnlag.beregn.read
     - name: SCOPE_BEREGN_READ_EKSTERN
-      value: ekstern.{{ SCOPE_BEREGN_READ }}
+      value: ekstern.{ { SCOPE_BEREGN_READ } }
     - name: SCOPE_SIMULER_READ
       value: afp.beholdningsgrunnlag.simuler.read
     - name: SCOPE_SIMULER_READ_EKSTERN
-      value: ekstern.{{ SCOPE_SIMULER_READ }}
+      value: ekstern.{ { SCOPE_SIMULER_READ } }
   azure:
     application:
       enabled: true
