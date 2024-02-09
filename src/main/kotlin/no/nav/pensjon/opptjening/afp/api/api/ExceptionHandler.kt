@@ -3,6 +3,8 @@ package no.nav.pensjon.opptjening.afp.api.api
 import no.nav.pensjon.opptjening.afp.api.api.model.UgyldigApiRequestException
 import no.nav.pensjon.opptjening.afp.api.domain.BeholdningException
 import no.nav.pensjon.opptjening.afp.api.domain.person.PersonException
+import no.nav.security.token.support.core.exceptions.JwtTokenInvalidClaimException
+import no.nav.security.token.support.spring.validation.interceptor.JwtTokenUnauthorizedException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
@@ -120,7 +122,24 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
         return if (ex.rootCause is UgyldigApiRequestException) {
             handle(ex.rootCause as UgyldigApiRequestException, request)
         } else {
+            logExeption(ex)
             super.handleHttpMessageNotReadable(ex, headers, status, request)
+        }
+    }
+
+    @ExceptionHandler(value = [JwtTokenUnauthorizedException::class])
+    fun handle(ex: JwtTokenUnauthorizedException, request: WebRequest): ResponseEntity<Any>? {
+        return if (ex.cause is JwtTokenInvalidClaimException) {
+            logExeption(ex)
+            handleExceptionInternal(
+                ex,
+                ExceptionBody("${ex.message}"),
+                HttpHeaders().apply { contentType = MediaType.APPLICATION_JSON },
+                HttpStatus.FORBIDDEN,
+                request
+            )
+        } else {
+            logAndHandleException(ex, request)
         }
     }
 

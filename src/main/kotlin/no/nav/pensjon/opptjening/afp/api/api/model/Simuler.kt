@@ -9,7 +9,7 @@ import java.time.YearMonth
 data class SimulerAFPBeholdningsgrunnlagRequest(
     val personId: String,
     val fraOgMedDato: LocalDate,
-    private val fremtidigInntektListe: List<FremtidigInntekter>,
+    private val fremtidigInntektListe: List<FremtidigInntekter> = emptyList(),
 ) {
     init {
         fremtidigInntektListe.groupBy { it.fraOgMedDato }

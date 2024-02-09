@@ -52,6 +52,6 @@ jobs:
       - name: 'Deploy pensjon-opptjening-afp-api to dev-gcp'
         uses: nais/deploy/actions/deploy@v2
         env:
-          RESOURCE: nais/dev-gcp.yml
+          RESOURCE: nais/dev-gcp.yml,nais/krakend-dev.yml
           CLUSTER: dev-gcp
           IMAGE: ${{ env.IMAGE_GHCR }}

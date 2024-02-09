@@ -17,16 +17,45 @@ spec:
       value: https://pdl-api.dev-fss-pub.nais.io/graphql
     - name: PDL_API_ID
       value: dev-fss.pdl.pdl-api
+    - name: SCOPE_BEREGN_READ
+      value: afp.beholdningsgrunnlag.beregn.read
+    - name: SCOPE_BEREGN_READ_EKSTERN
+      value: ekstern.{{ SCOPE_BEREGN_READ }}
+    - name: SCOPE_SIMULER_READ
+      value: afp.beholdningsgrunnlag.simuler.read
+    - name: SCOPE_SIMULER_READ_EKSTERN
+      value: ekstern.{{ SCOPE_SIMULER_READ }}
   azure:
-#    sidecar:
-#      enabled: true
-#      autoLogin: true
     application:
       enabled: true
-#      allowAllUsers: false
-#      claims:
-#        groups:
-#          - id: "7ef907b4-ec9f-47dd-ab41-4e54ba32ceb1" #AAD pensjonopptjening testgruppe
+  maskinporten:
+    enabled: true
+    scopes:
+      exposes:
+        - name: { { SCOPE_BEREGN_READ_EKSTERN } } #nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.beregn.read
+          enabled: true
+          product: pensjonopptjening
+          consumers:
+            - name: NAV
+              orgno: 889640782
+            - name: KLP
+              orgno: 938708606
+            - name: SPK
+              orgno: 982583462
+            - name: STOREBRAND
+              orgno: 931936492
+        - name: { { SCOPE_SIMULER_READ_EKSTERN } }  #nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.simuler.read
+          enabled: true
+          product: pensjonopptjening
+          consumers:
+            - name: NAV
+              orgno: 889640782
+            - name: KLP
+              orgno: 938708606
+            - name: SPK
+              orgno: 982583462
+            - name: STOREBRAND
+              orgno: 931936492
   ingresses:
     - https://pensjon-opptjening-afp-api.intern.dev.nav.no
   accessPolicy:
@@ -35,12 +64,19 @@ spec:
         - application: tjenestepensjon-simulering
           namespace: pensjonskalkulator
           cluster: dev-fss
+          permissions:
+            scopes:
+              - { { SCOPE_SIMULER_READ } }
         - application: pensjon-opptjening-afp-api
+          permissions:
+            scopes:
+              - { { SCOPE_BEREGN_READ } }
+              - { { SCOPE_SIMULER_READ } }
     outbound:
       external:
         - host: pensjon-popp-q2.dev-fss-pub.nais.io
         - host: pdl-api.dev-fss-pub.nais.io
-  image: {{ image }}
+  image: { { image } }
   liveness:
     path: /actuator/health/liveness
     port: 8080

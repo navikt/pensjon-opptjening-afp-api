@@ -1,0 +1,37 @@
+apiVersion: krakend.nais.io/v1
+kind: ApiEndpoints
+metadata:
+  name: ekstern-pensjon-opptjening-afp-api
+  namespace: pensjonopptjening
+  labels:
+    team: pensjonopptjening
+spec:
+  auth:
+    name: maskinporten
+    cache: true
+    scope:
+      - nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.beregn.read
+      - nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.simuler.read
+  rateLimit:
+    maxRate: 40
+    clientMaxRate: 5
+    every: 5s
+    strategy: header
+    key: Authorization
+    capacity: 40
+    clientCapacity: 5
+  endpoints:
+    - path: /opptjening/afp/beholdningsgrunnlag/beregn
+      method: POST
+      forwardHeaders:
+        - Authorization
+        - Content-Type
+      backendHost: https://pensjon-opptjening-afp-api.intern.dev.nav.no
+      backendPath: /api/beregn
+    - path: /opptjening/afp/beholdningsgrunnlag/simuler
+      method: POST
+      forwardHeaders:
+        - Authorization
+        - Content-Type
+      backendHost: https://pensjon-opptjening-afp-api.intern.dev.nav.no
+      backendPath: /api/simuler
