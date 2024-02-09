@@ -65,11 +65,11 @@ spec:
           namespace: pensjonskalkulator
           cluster: dev-fss
           permissions:
-            scopes:
+            roles:
               - afp.beholdningsgrunnlag.beregn.read
         - application: pensjon-opptjening-afp-api
           permissions:
-            scopes:
+            roles:
               - afp.beholdningsgrunnlag.beregn.read
               - afp.beholdningsgrunnlag.simuler.read
     outbound:

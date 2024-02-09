@@ -17,7 +17,8 @@ internal class TestTokenIssuer(
     fun token(
         issuerId: String,
         audience: String,
-        scopes: List<String>
+        scopes: List<String>,
+        roles: List<String>,
     ): String {
         return oauth2Server.issueToken(
             issuerId = issuerId,
@@ -28,7 +29,8 @@ internal class TestTokenIssuer(
                 typeHeader = JOSEObjectType.JWT.type,
                 audience = listOf(audience),
                 claims = mapOf(
-                    "scope" to scopes
+                    "scope" to scopes,
+                    "roles" to roles,
                 ),
                 expiry = 3600
             )
@@ -43,8 +45,14 @@ internal class TestTokenIssuer(
             TokenScopeConfig.SCOPE_BEREGN_READ_EKSTERN,
             TokenScopeConfig.SCOPE_SIMULER_READ,
             TokenScopeConfig.SCOPE_SIMULER_READ_EKSTERN
+        ),
+        roles: List<String> = listOf(
+            TokenScopeConfig.SCOPE_BEREGN_READ,
+            TokenScopeConfig.SCOPE_BEREGN_READ_EKSTERN,
+            TokenScopeConfig.SCOPE_SIMULER_READ,
+            TokenScopeConfig.SCOPE_SIMULER_READ_EKSTERN
         )
     ): String {
-        return """Bearer ${token(issuerId, audience, scopes)}"""
+        return """Bearer ${token(issuerId, audience, scopes, roles)}"""
     }
 }
