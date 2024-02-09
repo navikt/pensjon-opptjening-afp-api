@@ -37,25 +37,25 @@ spec:
           product: pensjonopptjening
           consumers:
             - name: NAV
-              orgno: 889640782
+              orgno: "889640782"
             - name: KLP
-              orgno: 938708606
+              orgno: "938708606"
             - name: SPK
-              orgno: 982583462
+              orgno: "982583462"
             - name: STOREBRAND
-              orgno: 931936492
+              orgno: "931936492"
         - name: ekstern.afp.beholdningsgrunnlag.simuler.read  #nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.simuler.read
           enabled: true
           product: pensjonopptjening
           consumers:
             - name: NAV
-              orgno: 889640782
+              orgno: "889640782"
             - name: KLP
-              orgno: 938708606
+              orgno: "938708606"
             - name: SPK
-              orgno: 982583462
+              orgno: "982583462"
             - name: STOREBRAND
-              orgno: 931936492
+              orgno: "931936492"
   ingresses:
     - https://pensjon-opptjening-afp-api.intern.dev.nav.no
   accessPolicy:
