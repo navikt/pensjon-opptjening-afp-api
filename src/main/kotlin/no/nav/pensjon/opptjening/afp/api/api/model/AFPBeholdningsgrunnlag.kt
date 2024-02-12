@@ -2,7 +2,7 @@ package no.nav.pensjon.opptjening.afp.api.api.model
 
 import java.time.LocalDate
 
-data class PensjonsBeholdningsPeriode(
+data class AFPBeholdningsgrunnlag(
     val fraOgMedDato: LocalDate,
-    val pensjonsBeholdning: Int
+    val belop: Int
 )

@@ -150,14 +150,14 @@ class WebApiTest {
 
         val expected = """
                 {  
-                    "pensjonsBeholdningsPeriodeListe": [
+                    "afpBeholdningsgrunnlag": [
                      {
                         "fraOgMedDato":"2023-01-01",
-                        "pensjonsBeholdning":5000
+                        "belop":5000
                      },
                      {
                         "fraOgMedDato":"2023-05-01",
-                        "pensjonsBeholdning":5500
+                        "belop":5500
                      }
                     ]                    
                 }

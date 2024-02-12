@@ -32,15 +32,15 @@ data class SimulerAFPBeholdningsgrunnlagRequest(
 }
 
 data class SimulerAFPBeholdningsgrunnlagResponse(
-    val pensjonsBeholdningsPeriodeListe: List<PensjonsBeholdningsPeriode>
+    val afpBeholdningsgrunnlag: List<no.nav.pensjon.opptjening.afp.api.api.model.AFPBeholdningsgrunnlag>
 ) {
     companion object {
         fun of(afpBeholdningsgrunnlag: List<AFPBeholdningsgrunnlag>): SimulerAFPBeholdningsgrunnlagResponse {
             return SimulerAFPBeholdningsgrunnlagResponse(
                 afpBeholdningsgrunnlag.map {
-                    PensjonsBeholdningsPeriode(
+                    AFPBeholdningsgrunnlag(
                         fraOgMedDato = it.fraOgMedDato,
-                        pensjonsBeholdning = it.beholdning,
+                        belop = it.beholdning,
                     )
                 }
             )
