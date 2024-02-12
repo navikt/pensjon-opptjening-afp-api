@@ -68,7 +68,7 @@ spec:
           cluster: dev-fss
           permissions:
             roles:
-              - afp.beholdningsgrunnlag.beregn.read
+              - afp.beholdningsgrunnlag.simuler.read
         - application: pensjon-opptjening-afp-api
           permissions:
             roles:
