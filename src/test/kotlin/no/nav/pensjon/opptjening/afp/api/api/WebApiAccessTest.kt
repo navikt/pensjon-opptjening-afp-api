@@ -90,14 +90,14 @@ class WebApiAccessTest {
     }
 
     @Test
-    fun `svarer med 403 dersom role i token ikke matcher påkrevet role`() {
+    fun `svarer med 403 dersom scope i token ikke matcher påkrevet verdi`() {
         mvc.perform(
             MockMvcRequestBuilders.post("/api/beregn")
                 .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(
                     AUTHORIZATION,
-                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.ISSUER_MASKINPORTEN, roles = listOf("baluba"))
+                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.ISSUER_MASKINPORTEN, scopes = listOf("baluba"))
                 )
         )
             .andExpect(status().isForbidden)
@@ -108,7 +108,32 @@ class WebApiAccessTest {
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(
                     AUTHORIZATION,
-                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.ISSUER_MASKINPORTEN, roles = listOf("baluba"))
+                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.ISSUER_MASKINPORTEN, scopes = listOf("baluba"))
+                )
+        )
+            .andExpect(status().isForbidden)
+    }
+
+    @Test
+    fun `svarer med 403 dersom role i token ikke matcher påkrevet verdi`() {
+        mvc.perform(
+            MockMvcRequestBuilders.post("/api/beregn")
+                .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
+                .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
+                .header(
+                    AUTHORIZATION,
+                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.ISSUER_AZURE, roles = listOf("baluba"))
+                )
+        )
+            .andExpect(status().isForbidden)
+
+        mvc.perform(
+            MockMvcRequestBuilders.post("/api/simuler")
+                .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
+                .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
+                .header(
+                    AUTHORIZATION,
+                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.ISSUER_AZURE, roles = listOf("baluba"))
                 )
         )
             .andExpect(status().isForbidden)

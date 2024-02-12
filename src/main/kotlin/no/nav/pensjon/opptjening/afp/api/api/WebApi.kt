@@ -27,8 +27,8 @@ class WebApi(
     @PostMapping("/beregn")
     @RequiredIssuers(
         value = [
-            ProtectedWithClaims(issuer = ISSUER_AZURE, claimMap = ["scope=$SCOPE_BEREGN_READ"]),
-            ProtectedWithClaims(issuer = ISSUER_MASKINPORTEN, claimMap = ["roles=$SCOPE_BEREGN_READ_EKSTERN"]),
+            ProtectedWithClaims(issuer = ISSUER_AZURE, claimMap = ["roles=$SCOPE_BEREGN_READ"]),
+            ProtectedWithClaims(issuer = ISSUER_MASKINPORTEN, claimMap = ["scope=$SCOPE_BEREGN_READ_EKSTERN"]),
         ]
     )
     fun beregn(
@@ -47,8 +47,8 @@ class WebApi(
     @PostMapping("/simuler")
     @RequiredIssuers(
         value = [
-            ProtectedWithClaims(issuer = ISSUER_AZURE, claimMap = ["scope=$SCOPE_SIMULER_READ"]),
-            ProtectedWithClaims(issuer = ISSUER_MASKINPORTEN, claimMap = ["roles=$SCOPE_SIMULER_READ_EKSTERN"]),
+            ProtectedWithClaims(issuer = ISSUER_AZURE, claimMap = ["roles=$SCOPE_SIMULER_READ"]),
+            ProtectedWithClaims(issuer = ISSUER_MASKINPORTEN, claimMap = ["scope=$SCOPE_SIMULER_READ_EKSTERN"]),
         ]
     )
     fun simuler(
