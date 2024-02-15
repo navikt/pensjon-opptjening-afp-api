@@ -18,11 +18,11 @@ spec:
     - name: PDL_API_ID
       value: dev-fss.pdl.pdl-api
     - name: SCOPE_BEREGN_READ
-      value: nav:pensjonopptjening:afp.beholdningsgrunnlag.beregn.read
+      value: afp.beholdningsgrunnlag.beregn.read
     - name: SCOPE_BEREGN_READ_EKSTERN
       value: nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.beregn.read
     - name: SCOPE_SIMULER_READ
-      value: nav:pensjonopptjening:afp.beholdningsgrunnlag.simuler.read
+      value: afp.beholdningsgrunnlag.simuler.read
     - name: SCOPE_SIMULER_READ_EKSTERN
       value: nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.simuler.read
   azure:
@@ -68,12 +68,12 @@ spec:
           cluster: dev-fss
           permissions:
             roles:
-              - nav:pensjonopptjening:afp.beholdningsgrunnlag.simuler.read
+              - afp.beholdningsgrunnlag.simuler.read
         - application: pensjon-opptjening-afp-api
           permissions:
             roles:
-              - nav:pensjonopptjening:afp.beholdningsgrunnlag.beregn.read
-              - nav:pensjonopptjening:afp.beholdningsgrunnlag.simuler.read
+              - afp.beholdningsgrunnlag.beregn.read
+              - afp.beholdningsgrunnlag.simuler.read
     outbound:
       external:
         - host: pensjon-popp-q2.dev-fss-pub.nais.io

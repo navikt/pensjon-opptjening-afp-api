@@ -25,9 +25,9 @@ data class TokenScopeConfig(
     companion object {
         const val ISSUER_AZURE = "azure"
         const val ISSUER_MASKINPORTEN = "maskinporten"
-        const val SCOPE_BEREGN_READ = "nav:pensjonopptjening:afp.beholdningsgrunnlag.beregn.read"
+        const val SCOPE_BEREGN_READ = "afp.beholdningsgrunnlag.beregn.read"
         const val SCOPE_BEREGN_READ_EKSTERN = "nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.beregn.read"
-        const val SCOPE_SIMULER_READ = "nav:pensjonopptjening:afp.beholdningsgrunnlag.simuler.read"
+        const val SCOPE_SIMULER_READ = "afp.beholdningsgrunnlag.simuler.read"
         const val SCOPE_SIMULER_READ_EKSTERN = "nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.simuler.read"
     }
 }
