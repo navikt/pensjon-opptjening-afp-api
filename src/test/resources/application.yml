@@ -13,3 +13,5 @@ no.nav.security.jwt:
     maskinporten:
       discoveryurl: http://localhost:${mock-oauth2-server.port}/maskinporten/.well-known/openid-configuration
       accepted_audience: pensjon-opptjening-afp-api
+      validation:
+        optional-claims: sub
