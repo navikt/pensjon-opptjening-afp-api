@@ -1,9 +1,9 @@
 POPP_URL: http://localhost:9991/api
 PDL_URL: http://localhost:9991/graphql
-SCOPE_BEREGN_READ: afp.beholdningsgrunnlag.beregn.read
-SCOPE_BEREGN_READ_EKSTERN: ekstern.${SCOPE_BEREGN_READ}
-SCOPE_SIMULER_READ: afp.beholdningsgrunnlag.simuler.read
-SCOPE_SIMULER_READ_EKSTERN: ekstern.${SCOPE_SIMULER_READ}
+SCOPE_BEREGN_READ: nav:pensjonopptjening:afp.beholdningsgrunnlag.beregn.read
+SCOPE_BEREGN_READ_EKSTERN: nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.beregn.read
+SCOPE_SIMULER_READ: nav:pensjonopptjening:afp.beholdningsgrunnlag.simuler.read
+SCOPE_SIMULER_READ_EKSTERN: nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.simuler.read
 
 no.nav.security.jwt:
   issuer:
