@@ -26,14 +26,12 @@ spec:
       forwardHeaders:
         - Authorization
         - Content-Type
-        - Content-Length
-      backendHost: https://pensjon-opptjening-afp-api.intern.dev.nav.no
+      backendHost: http://pensjon-opptjening-afp-api
       backendPath: /api/beregn
     - path: /opptjening/afp/beholdningsgrunnlag/simuler
       method: POST
       forwardHeaders:
         - Authorization
         - Content-Type
-        - Content-Length
-      backendHost: https://pensjon-opptjening-afp-api.intern.dev.nav.no
+      backendHost: http://pensjon-opptjening-afp-api
       backendPath: /api/simuler
