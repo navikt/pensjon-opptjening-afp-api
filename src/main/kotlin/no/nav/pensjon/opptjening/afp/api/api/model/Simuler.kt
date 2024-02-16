@@ -8,7 +8,7 @@ import java.time.YearMonth
 
 data class SimulerAFPBeholdningsgrunnlagRequest(
     val personId: String,
-    val fraOgMedDato: LocalDate,
+    val uttaksDato: LocalDate,
     private val fremtidigInntektListe: List<FremtidigInntekter> = emptyList(),
 ) {
     init {

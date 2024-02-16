@@ -5,7 +5,7 @@ import java.time.LocalDate
 
 data class BeregnAFPBeholdningsgrunnlagRequest(
     val personId: String,
-    val fraOgMedDato: LocalDate
+    val uttaksDato: LocalDate
 )
 
 data class BeregnAFPBeholdningsgrunnlagResponse(

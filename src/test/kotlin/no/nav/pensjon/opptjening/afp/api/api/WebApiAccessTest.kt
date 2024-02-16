@@ -55,7 +55,7 @@ class WebApiAccessTest {
     fun `svarer med 200 for issuer azure og gyldig token`() {
         mvc.perform(
             MockMvcRequestBuilders.post("/api/beregn")
-                .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
+                .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.ISSUER_AZURE))
         )
@@ -63,7 +63,7 @@ class WebApiAccessTest {
 
         mvc.perform(
             MockMvcRequestBuilders.post("/api/simuler")
-                .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
+                .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.ISSUER_AZURE))
         )
@@ -74,7 +74,7 @@ class WebApiAccessTest {
     fun `svarer med 200 for issuer maskinporten`() {
         mvc.perform(
             MockMvcRequestBuilders.post("/api/beregn")
-                .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
+                .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.ISSUER_MASKINPORTEN))
         )
@@ -82,7 +82,7 @@ class WebApiAccessTest {
 
         mvc.perform(
             MockMvcRequestBuilders.post("/api/simuler")
-                .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
+                .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.ISSUER_MASKINPORTEN))
         )
@@ -93,7 +93,7 @@ class WebApiAccessTest {
     fun `svarer med 403 dersom scope i token ikke matcher påkrevet verdi`() {
         mvc.perform(
             MockMvcRequestBuilders.post("/api/beregn")
-                .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
+                .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(
                     AUTHORIZATION,
@@ -104,7 +104,7 @@ class WebApiAccessTest {
 
         mvc.perform(
             MockMvcRequestBuilders.post("/api/simuler")
-                .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
+                .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(
                     AUTHORIZATION,
@@ -118,7 +118,7 @@ class WebApiAccessTest {
     fun `svarer med 403 dersom role i token ikke matcher påkrevet verdi`() {
         mvc.perform(
             MockMvcRequestBuilders.post("/api/beregn")
-                .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
+                .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(
                     AUTHORIZATION,
@@ -129,7 +129,7 @@ class WebApiAccessTest {
 
         mvc.perform(
             MockMvcRequestBuilders.post("/api/simuler")
-                .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
+                .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(
                     AUTHORIZATION,
@@ -143,7 +143,7 @@ class WebApiAccessTest {
     fun `svarer med 200 dersom token har flere scopes, og et av dem er gyldig for endepunktet`() {
         mvc.perform(
             MockMvcRequestBuilders.post("/api/beregn")
-                .content("""{"personId":"12345","fraOgMedDato":"2024-01-01"}""")
+                .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(
                     AUTHORIZATION,

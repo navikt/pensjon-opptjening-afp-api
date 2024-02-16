@@ -52,7 +52,7 @@ class WebApiTest {
                     """
                     {
                         "personId":"1234",
-                        "fraOgMedDato":"2023-01-01"
+                        "uttaksDato":"2023-01-01"
                     }
                 """.trimIndent()
                 )
@@ -78,7 +78,7 @@ class WebApiTest {
                     """
                     {
                         "personId":"1234",
-                        "fraOgMedDato":"2023-01-01"
+                        "uttaksDato":"2023-01-01"
                     }
                 """.trimIndent()
                 )
@@ -97,7 +97,7 @@ class WebApiTest {
                     """
                     {
                         "personId":"1234",
-                        "fraOgMedDato":"2023-01-01",
+                        "uttaksDato":"2023-01-01",
                         "fremtidigInntektListe": [
                             {
                                 "arligInntekt": 1000,
@@ -144,7 +144,7 @@ class WebApiTest {
         val request = """
                     {
                         "personId":"1234",
-                        "fraOgMedDato":"2023-01-01"
+                        "uttaksDato":"2023-01-01"
                     }
                 """.trimIndent()
 

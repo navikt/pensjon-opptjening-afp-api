@@ -38,7 +38,7 @@ class WebApi(
             BeregnAFPBeholdningsgrunnlagResponse.of(
                 service.beregnAFPBeholdingsgrunnlag(
                     fnr = request.personId,
-                    beholdningFraOgMed = request.fraOgMedDato
+                    beholdningFraOgMed = request.uttaksDato
                 )
             )
         )
@@ -58,7 +58,7 @@ class WebApi(
             SimulerAFPBeholdningsgrunnlagResponse.of(
                 service.simulerAFPBeholdningsgrunnlag(
                     fnr = request.personId,
-                    beholdningFraOgMed = request.fraOgMedDato,
+                    beholdningFraOgMed = request.uttaksDato,
                     fremtidigeInntekter = request.fremtidigeInntekter,
                 )
             )

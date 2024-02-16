@@ -26,6 +26,7 @@ spec:
       forwardHeaders:
         - Authorization
         - Content-Type
+        - x-request-id
       backendHost: http://pensjon-opptjening-afp-api
       backendPath: /api/beregn
     - path: /opptjening/afp/beholdningsgrunnlag/simuler
@@ -33,5 +34,6 @@ spec:
       forwardHeaders:
         - Authorization
         - Content-Type
+        - x-request-id
       backendHost: http://pensjon-opptjening-afp-api
       backendPath: /api/simuler
