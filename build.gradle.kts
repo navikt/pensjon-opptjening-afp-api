@@ -47,6 +47,7 @@ dependencies {
     // Log and metric
     implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("net.logstash.logback:logstash-logback-encoder:$logbackEncoderVersion")
+    implementation("ch.qos.logback:logback-access:1.4.14")
 
     testImplementation(kotlin("test"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
