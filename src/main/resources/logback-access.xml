@@ -35,7 +35,7 @@
                         "token_azp_name": "%requestAttribute{token_azp_name}",
                         "token_issuer": "%requestAttribute{token_issuer}",
                         "token_scope": "%requestAttribute{token_scope}",
-                        "token_subject": "%requestAttribute{token_subject}",
+                        "token_subject": "%requestAttribute{token_subject}"
                         }
                     </pattern>
                 </pattern>
