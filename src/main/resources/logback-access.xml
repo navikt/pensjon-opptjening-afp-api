@@ -29,8 +29,13 @@
                 <pattern>
                     <pattern>
                         {
-                        "hardcodedkey":"hardcodedvalue",
-                        "customkey":"%requestAttribute{customkey}"
+                        "application_version": "%requestAttribute{application_version}",
+                        "request_id": "%requestAttribute{request_id}",
+                        "token_audience": "%requestAttribute{token_audience}",
+                        "token_azp_name": "%requestAttribute{token_azp_name}",
+                        "token_issuer": "%requestAttribute{token_issuer}",
+                        "token_scope": "%requestAttribute{token_scope}",
+                        "token_subject": "%requestAttribute{token_subject}",
                         }
                     </pattern>
                 </pattern>
