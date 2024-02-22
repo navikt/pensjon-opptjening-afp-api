@@ -8,10 +8,12 @@ import java.util.UUID
 class RequestIdValve : ValveBase() {
 
     override fun invoke(request: Request, response: Response) {
-        request.getHeader("x-request-id")?.also {
-            request.setAttribute("request_id", it)
+        val header = request.getHeader("x-request-id")
+
+        if (!header.isNullOrEmpty()) {
+            request.setAttribute("request_id", header)
             request.setAttribute("request_id_type", "header")
-        } ?: {
+        } else {
             request.setAttribute("request_id", UUID.randomUUID().toString())
             request.setAttribute("request_id_type", "generated")
         }
