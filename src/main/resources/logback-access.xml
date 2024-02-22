@@ -34,7 +34,9 @@
                         "request_id_type": "%requestAttribute{request_id_type}",
                         "token_audience": "%requestAttribute{token_audience}",
                         "token_azp_name": "%requestAttribute{token_azp_name}",
+                        "token_consumer": "%requestAttribute{token_consumer}",
                         "token_issuer": "%requestAttribute{token_issuer}",
+                        "token_roles": "%requestAttribute{token_roles}",
                         "token_scope": "%requestAttribute{token_scope}",
                         "token_subject": "%requestAttribute{token_subject}"
                         }
