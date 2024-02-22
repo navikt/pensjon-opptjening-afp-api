@@ -23,8 +23,8 @@ data class TokenScopeConfig(
     }
 
     companion object {
-        const val ISSUER_AZURE = "azure"
-        const val ISSUER_MASKINPORTEN = "maskinporten"
+        const val AZURE_CONFIG_ALIAS = "azure"
+        const val MASKINPORTEN_CONFIG_ALIAS = "maskinporten"
         const val SCOPE_BEREGN_READ = "afp.beholdningsgrunnlag.beregn.read"
         const val SCOPE_BEREGN_READ_EKSTERN = "nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.beregn.read"
         const val SCOPE_SIMULER_READ = "afp.beholdningsgrunnlag.simuler.read"

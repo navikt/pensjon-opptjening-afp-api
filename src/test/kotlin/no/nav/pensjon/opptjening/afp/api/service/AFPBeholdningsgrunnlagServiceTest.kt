@@ -1,5 +1,6 @@
 package no.nav.pensjon.opptjening.afp.api.service
 
+import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdiningsgrunnlagBeregnetRepo
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlag
 import no.nav.pensjon.opptjening.afp.api.domain.FremtidigInntekt
 import no.nav.pensjon.opptjening.afp.api.domain.FremtidigeInntekter
@@ -7,8 +8,8 @@ import no.nav.pensjon.opptjening.afp.api.domain.Pensjonsbeholdning
 import no.nav.pensjon.opptjening.afp.api.domain.person.Ident
 import no.nav.pensjon.opptjening.afp.api.domain.person.IdentHistorikk
 import no.nav.pensjon.opptjening.afp.api.domain.person.Person
-import no.nav.pensjon.opptjening.afp.api.domain.person.Personoppslag
 import no.nav.pensjon.opptjening.afp.api.domain.person.PersonException
+import no.nav.pensjon.opptjening.afp.api.domain.person.Personoppslag
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -25,15 +26,21 @@ class AFPBeholdningsgrunnlagServiceTest {
 
     private val pensjonsbeholdning: Pensjonsbeholdning = mock()
     private val personoppslag: Personoppslag = mock()
+    private val repo: AFPBeholdiningsgrunnlagBeregnetRepo = mock()
     private val service: AFPBeholdningsgrunnlagService = AFPBeholdningsgrunnlagService(
         pensjonsbeholdning = pensjonsbeholdning,
-        personoppslag = personoppslag
+        personoppslag = personoppslag,
+        repo = repo,
     )
 
     @Test
     fun `kaster exception dersom person ikke eksisterer`() {
         assertThrows<PersonException.PersonIkkeFunnet> {
-            service.beregnAFPBeholdingsgrunnlag("1", LocalDate.now())
+            service.beregnAFPBeholdingsgrunnlag(
+                fnr = "1",
+                uttaksDato = LocalDate.now(),
+                konsument = "k"
+            )
         }
     }
 
@@ -44,7 +51,8 @@ class AFPBeholdningsgrunnlagServiceTest {
 
         service.beregnAFPBeholdingsgrunnlag(
             fnr = "1",
-            beholdningFraOgMed = LocalDate.of(2070, Month.JANUARY, 1)
+            uttaksDato = LocalDate.of(2070, Month.JANUARY, 1),
+            konsument = "k",
         )
 
         verify(personoppslag).hent("1")
@@ -69,7 +77,7 @@ class AFPBeholdningsgrunnlagServiceTest {
 
         service.simulerAFPBeholdningsgrunnlag(
             fnr = "1",
-            beholdningFraOgMed = LocalDate.of(2070, Month.JANUARY, 1),
+            uttaksDato = LocalDate.of(2070, Month.JANUARY, 1),
             fremtidigeInntekter = fremtidigInntekt
         )
 
@@ -105,14 +113,16 @@ class AFPBeholdningsgrunnlagServiceTest {
 
         val actual2052 = service.beregnAFPBeholdingsgrunnlag(
             fnr = "1",
-            beholdningFraOgMed = LocalDate.of(2052, Month.JANUARY, 1)
+            uttaksDato = LocalDate.of(2052, Month.JANUARY, 1),
+            konsument = "k",
         )
 
         val expected2052 = listOf(b, c)
 
         val actual2060 = service.beregnAFPBeholdingsgrunnlag(
             fnr = "1",
-            beholdningFraOgMed = LocalDate.of(2060, Month.JANUARY, 1)
+            uttaksDato = LocalDate.of(2060, Month.JANUARY, 1),
+            konsument = "k",
         )
 
         val expected2060 = listOf(c)
@@ -144,7 +154,7 @@ class AFPBeholdningsgrunnlagServiceTest {
 
         val actual2052 = service.simulerAFPBeholdningsgrunnlag(
             fnr = "1",
-            beholdningFraOgMed = LocalDate.of(2052, Month.JANUARY, 1),
+            uttaksDato = LocalDate.of(2052, Month.JANUARY, 1),
             fremtidigeInntekter = FremtidigeInntekter(emptyList())
         )
 
@@ -152,7 +162,7 @@ class AFPBeholdningsgrunnlagServiceTest {
 
         val actual2060 = service.simulerAFPBeholdningsgrunnlag(
             fnr = "1",
-            beholdningFraOgMed = LocalDate.of(2060, Month.JANUARY, 1),
+            uttaksDato = LocalDate.of(2060, Month.JANUARY, 1),
             fremtidigeInntekter = FremtidigeInntekter(emptyList())
         )
 

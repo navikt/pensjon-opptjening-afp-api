@@ -16,9 +16,19 @@ internal class TestTokenIssuer(
 
     fun token(
         issuerId: String,
-        audience: String,
-        scopes: List<String>,
-        roles: List<String>,
+        audience: String = ACCEPTED_AUDIENCE,
+        scopes: List<String> = listOf(
+            TokenScopeConfig.SCOPE_BEREGN_READ,
+            TokenScopeConfig.SCOPE_BEREGN_READ_EKSTERN,
+            TokenScopeConfig.SCOPE_SIMULER_READ,
+            TokenScopeConfig.SCOPE_SIMULER_READ_EKSTERN
+        ),
+        roles: List<String> = listOf(
+            TokenScopeConfig.SCOPE_BEREGN_READ,
+            TokenScopeConfig.SCOPE_BEREGN_READ_EKSTERN,
+            TokenScopeConfig.SCOPE_SIMULER_READ,
+            TokenScopeConfig.SCOPE_SIMULER_READ_EKSTERN
+        )
     ): String {
         return oauth2Server.issueToken(
             issuerId = issuerId,
@@ -31,6 +41,11 @@ internal class TestTokenIssuer(
                 claims = mapOf(
                     "scope" to scopes,
                     "roles" to roles,
+                    "azp_name" to "name-of-azure-app-ish",
+                    "consumer" to mapOf(
+                        "authority" to "iso6523-actorid-upis",
+                        "ID" to "0192:consumer-org-no"
+                    )
                 ),
                 expiry = 3600
             )

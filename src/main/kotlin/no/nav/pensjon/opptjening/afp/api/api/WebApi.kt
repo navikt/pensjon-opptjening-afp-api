@@ -4,8 +4,9 @@ import no.nav.pensjon.opptjening.afp.api.api.model.BeregnAFPBeholdningsgrunnlagR
 import no.nav.pensjon.opptjening.afp.api.api.model.BeregnAFPBeholdningsgrunnlagResponse
 import no.nav.pensjon.opptjening.afp.api.api.model.SimulerAFPBeholdningsgrunnlagRequest
 import no.nav.pensjon.opptjening.afp.api.api.model.SimulerAFPBeholdningsgrunnlagResponse
-import no.nav.pensjon.opptjening.afp.api.config.TokenScopeConfig.Companion.ISSUER_AZURE
-import no.nav.pensjon.opptjening.afp.api.config.TokenScopeConfig.Companion.ISSUER_MASKINPORTEN
+import no.nav.pensjon.opptjening.afp.api.config.RequestAttributeConsumerResolver
+import no.nav.pensjon.opptjening.afp.api.config.TokenScopeConfig.Companion.AZURE_CONFIG_ALIAS
+import no.nav.pensjon.opptjening.afp.api.config.TokenScopeConfig.Companion.MASKINPORTEN_CONFIG_ALIAS
 import no.nav.pensjon.opptjening.afp.api.config.TokenScopeConfig.Companion.SCOPE_BEREGN_READ
 import no.nav.pensjon.opptjening.afp.api.config.TokenScopeConfig.Companion.SCOPE_BEREGN_READ_EKSTERN
 import no.nav.pensjon.opptjening.afp.api.config.TokenScopeConfig.Companion.SCOPE_SIMULER_READ
@@ -18,17 +19,19 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.context.request.RequestContextHolder
 
 @RestController
 @RequestMapping("/api")
 class WebApi(
     private val service: AFPBeholdningsgrunnlagService,
+    private val consumerResolver: RequestAttributeConsumerResolver,
 ) {
     @PostMapping("/beregn")
     @RequiredIssuers(
         value = [
-            ProtectedWithClaims(issuer = ISSUER_AZURE, claimMap = ["roles=$SCOPE_BEREGN_READ"]),
-            ProtectedWithClaims(issuer = ISSUER_MASKINPORTEN, claimMap = ["scope=$SCOPE_BEREGN_READ_EKSTERN"]),
+            ProtectedWithClaims(issuer = AZURE_CONFIG_ALIAS, claimMap = ["roles=$SCOPE_BEREGN_READ"]),
+            ProtectedWithClaims(issuer = MASKINPORTEN_CONFIG_ALIAS, claimMap = ["scope=$SCOPE_BEREGN_READ_EKSTERN"]),
         ]
     )
     fun beregn(
@@ -38,7 +41,8 @@ class WebApi(
             BeregnAFPBeholdningsgrunnlagResponse.of(
                 service.beregnAFPBeholdingsgrunnlag(
                     fnr = request.personId,
-                    beholdningFraOgMed = request.uttaksDato
+                    uttaksDato = request.uttaksDato,
+                    konsument = consumerResolver.resolve(RequestContextHolder.currentRequestAttributes())
                 )
             )
         )
@@ -47,8 +51,8 @@ class WebApi(
     @PostMapping("/simuler")
     @RequiredIssuers(
         value = [
-            ProtectedWithClaims(issuer = ISSUER_AZURE, claimMap = ["roles=$SCOPE_SIMULER_READ"]),
-            ProtectedWithClaims(issuer = ISSUER_MASKINPORTEN, claimMap = ["scope=$SCOPE_SIMULER_READ_EKSTERN"]),
+            ProtectedWithClaims(issuer = AZURE_CONFIG_ALIAS, claimMap = ["roles=$SCOPE_SIMULER_READ"]),
+            ProtectedWithClaims(issuer = MASKINPORTEN_CONFIG_ALIAS, claimMap = ["scope=$SCOPE_SIMULER_READ_EKSTERN"]),
         ]
     )
     fun simuler(
@@ -58,7 +62,7 @@ class WebApi(
             SimulerAFPBeholdningsgrunnlagResponse.of(
                 service.simulerAFPBeholdningsgrunnlag(
                     fnr = request.personId,
-                    beholdningFraOgMed = request.uttaksDato,
+                    uttaksDato = request.uttaksDato,
                     fremtidigeInntekter = request.fremtidigeInntekter,
                 )
             )

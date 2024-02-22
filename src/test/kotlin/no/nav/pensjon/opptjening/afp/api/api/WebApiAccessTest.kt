@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.http.HttpHeaders.*
-import org.springframework.http.MediaType.*
+import org.springframework.http.HttpHeaders.AUTHORIZATION
+import org.springframework.http.HttpHeaders.CONTENT_TYPE
+import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -46,7 +47,7 @@ class WebApiAccessTest {
             MockMvcRequestBuilders.post("/api/beregn")
                 .content("""{}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.ISSUER_AZURE, "bogus"))
+                .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.AZURE_CONFIG_ALIAS, "bogus"))
         )
             .andExpect(status().isUnauthorized)
     }
@@ -57,7 +58,7 @@ class WebApiAccessTest {
             MockMvcRequestBuilders.post("/api/beregn")
                 .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.ISSUER_AZURE))
+                .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.AZURE_CONFIG_ALIAS))
         )
             .andExpect(status().isOk)
 
@@ -65,7 +66,7 @@ class WebApiAccessTest {
             MockMvcRequestBuilders.post("/api/simuler")
                 .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.ISSUER_AZURE))
+                .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.AZURE_CONFIG_ALIAS))
         )
             .andExpect(status().isOk)
     }
@@ -76,7 +77,7 @@ class WebApiAccessTest {
             MockMvcRequestBuilders.post("/api/beregn")
                 .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.ISSUER_MASKINPORTEN))
+                .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.MASKINPORTEN_CONFIG_ALIAS))
         )
             .andExpect(status().isOk)
 
@@ -84,7 +85,7 @@ class WebApiAccessTest {
             MockMvcRequestBuilders.post("/api/simuler")
                 .content("""{"personId":"12345","uttaksDato":"2024-01-01"}""")
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.ISSUER_MASKINPORTEN))
+                .header(AUTHORIZATION, tokenIssuer.bearerToken(TokenScopeConfig.MASKINPORTEN_CONFIG_ALIAS))
         )
             .andExpect(status().isOk)
     }
@@ -97,7 +98,7 @@ class WebApiAccessTest {
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(
                     AUTHORIZATION,
-                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.ISSUER_MASKINPORTEN, scopes = listOf("baluba"))
+                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.MASKINPORTEN_CONFIG_ALIAS, scopes = listOf("baluba"))
                 )
         )
             .andExpect(status().isForbidden)
@@ -108,7 +109,7 @@ class WebApiAccessTest {
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(
                     AUTHORIZATION,
-                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.ISSUER_MASKINPORTEN, scopes = listOf("baluba"))
+                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.MASKINPORTEN_CONFIG_ALIAS, scopes = listOf("baluba"))
                 )
         )
             .andExpect(status().isForbidden)
@@ -122,7 +123,7 @@ class WebApiAccessTest {
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(
                     AUTHORIZATION,
-                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.ISSUER_AZURE, roles = listOf("baluba"))
+                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.AZURE_CONFIG_ALIAS, roles = listOf("baluba"))
                 )
         )
             .andExpect(status().isForbidden)
@@ -133,7 +134,7 @@ class WebApiAccessTest {
                 .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
                 .header(
                     AUTHORIZATION,
-                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.ISSUER_AZURE, roles = listOf("baluba"))
+                    tokenIssuer.bearerToken(issuerId = TokenScopeConfig.AZURE_CONFIG_ALIAS, roles = listOf("baluba"))
                 )
         )
             .andExpect(status().isForbidden)
@@ -148,7 +149,7 @@ class WebApiAccessTest {
                 .header(
                     AUTHORIZATION,
                     tokenIssuer.bearerToken(
-                        issuerId = TokenScopeConfig.ISSUER_MASKINPORTEN,
+                        issuerId = TokenScopeConfig.MASKINPORTEN_CONFIG_ALIAS,
                         scopes = listOf(SCOPE_BEREGN_READ_EKSTERN, "bogus")
                     )
                 )
