@@ -13,7 +13,7 @@ class RequestIdValve : ValveBase() {
             request.setAttribute("request_id_type", "header")
         } ?: {
             request.setAttribute("request_id", UUID.randomUUID().toString())
-            request.setAttribute("request_id-type", "generated")
+            request.setAttribute("request_id_type", "generated")
         }
 
         getNext().invoke(request, response)

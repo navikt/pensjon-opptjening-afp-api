@@ -31,6 +31,7 @@
                         {
                         "application_version": "%requestAttribute{application_version}",
                         "request_id": "%requestAttribute{request_id}",
+                        "request_id_type": "%requestAttribute{request_id_type}",
                         "token_audience": "%requestAttribute{token_audience}",
                         "token_azp_name": "%requestAttribute{token_azp_name}",
                         "token_issuer": "%requestAttribute{token_issuer}",
