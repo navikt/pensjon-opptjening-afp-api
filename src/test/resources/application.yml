@@ -4,6 +4,8 @@ SCOPE_BEREGN_READ: afp.beholdningsgrunnlag.beregn.read
 SCOPE_BEREGN_READ_EKSTERN: nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.beregn.read
 SCOPE_SIMULER_READ: afp.beholdningsgrunnlag.simuler.read
 SCOPE_SIMULER_READ_EKSTERN: nav:pensjonopptjening:ekstern.afp.beholdningsgrunnlag.simuler.read
+AZURE_OPENID_CONFIG_ISSUER: http://localhost:${mock-oauth2-server.port}/azure
+MASKINPORTEN_ISSUER: http://localhost:${mock-oauth2-server.port}/maskinporten
 
 no.nav.security.jwt:
   issuer:
@@ -15,3 +17,9 @@ no.nav.security.jwt:
       accepted_audience: pensjon-opptjening-afp-api
       validation:
         optional-claims: sub
+
+spring.datasource:
+  driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+  url: jdbc:tc:postgresql:15:///test
+  username: test
+  password: test

@@ -21,3 +21,8 @@ no.nav.security.jwt:
       accepted_audience: https://pensjonopptjening-gw.ekstern.dev.nav.no/opptjening/afp/beholdningsgrunnlag
       validation:
         optional-claims: sub
+
+spring.datasource:
+  url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DATABASE}
+  username: ${DATABASE_USERNAME}
+  password: ${DATABASE_PASSWORD}

@@ -100,3 +100,14 @@ spec:
     requests:
       cpu: "200m"
       memory: "256Mi"
+  gcp:
+    sqlInstances:
+      - type: POSTGRES_15
+        cascadingDelete: true
+        diskAutoresize: true
+        #pointInTimeRecovery: true
+        name: pensjon-opptjening-afp-api-db
+        tier: db-custom-1-3840
+        databases:
+          - name: pensjon-opptjening-afp-api-db
+            envVarPrefix: DATABASE

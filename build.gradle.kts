@@ -7,6 +7,9 @@ val wiremockVersion = "3.0.1"
 val mockitoKotlinVersion = "5.2.1"
 val navTokenSupportVersion = "4.1.0"
 val hibernateValidatorVersion = "8.0.1.Final"
+val testcontainersVersion = "1.19.3"
+val postgresqlVersion = "42.7.2"
+val flywayCoreVersion = "10.8.1"
 
 plugins {
     val kotlinVersion = "1.9.22"
@@ -39,10 +42,14 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     implementation("no.nav.pensjonopptjening:pensjon-opptjening-azure-ad-client:$azureAdClient")
     implementation("no.nav.security:token-validation-spring:$navTokenSupportVersion")
     implementation("org.hibernate.validator:hibernate-validator:$hibernateValidatorVersion")
+    implementation("org.postgresql:postgresql:$postgresqlVersion")
+    implementation("org.flywaydb:flyway-core:$flywayCoreVersion")
+    implementation("org.flywaydb:flyway-database-postgresql:$flywayCoreVersion")
 
     // Log and metric
     implementation("io.micrometer:micrometer-registry-prometheus")
@@ -51,6 +58,7 @@ dependencies {
 
     testImplementation(kotlin("test"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.testcontainers:postgresql:$testcontainersVersion")
     testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
     testImplementation("com.github.tomakehurst:wiremock-jre8-standalone:$wiremockVersion")
     testImplementation("no.nav.security:token-validation-spring-test:$navTokenSupportVersion")
