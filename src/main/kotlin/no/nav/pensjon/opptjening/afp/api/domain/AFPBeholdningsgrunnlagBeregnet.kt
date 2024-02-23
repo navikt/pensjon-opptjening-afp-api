@@ -6,11 +6,9 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.UUID
 
-val zoneIdOslo: ZoneId = ZoneId.of("Europe/Oslo")
-
 data class AFPBeholdningsgrunnlagBeregnet(
     val id: UUID = UUID.randomUUID(),
-    val tidspunkt: ZonedDateTime = Instant.now().atZone(zoneIdOslo),
+    val tidspunkt: Instant = Instant.now(),
     val fnr: String,
     val uttaksdato: LocalDate,
     val konsument: String? = null,

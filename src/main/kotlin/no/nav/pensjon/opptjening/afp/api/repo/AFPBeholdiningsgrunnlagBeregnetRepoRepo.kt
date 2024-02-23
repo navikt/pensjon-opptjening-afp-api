@@ -6,7 +6,6 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdiningsgrunnlagBeregnetRepo
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlag
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlagBeregnet
-import no.nav.pensjon.opptjening.afp.api.domain.zoneIdOslo
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations
@@ -30,7 +29,7 @@ class AFPBeholdiningsgrunnlagBeregnetRepoRepo(
             MapSqlParameterSource(
                 mapOf(
                     "id" to grunnlag.id,
-                    "tidspunkt" to Timestamp.from(grunnlag.tidspunkt.toInstant()),
+                    "tidspunkt" to Timestamp.from(grunnlag.tidspunkt),
                     "fnr" to grunnlag.fnr,
                     "uttaksdato" to grunnlag.uttaksdato,
                     "konsument" to grunnlag.konsument,
@@ -49,8 +48,8 @@ class AFPBeholdiningsgrunnlagBeregnetRepoRepo(
     }
 
     data class AFPBeholdningsgrunnlagDb(
-        val fraOgMedDato: LocalDate,
-        val tilOgMedDato: LocalDate?,
+        val fraOgMedDato: String,
+        val tilOgMedDato: String?,
         val beholdning: Int
     )
 
@@ -60,19 +59,19 @@ class AFPBeholdiningsgrunnlagBeregnetRepoRepo(
 
     private fun AFPBeholdningsgrunnlag.toDb(): AFPBeholdningsgrunnlagDb {
         return AFPBeholdningsgrunnlagDb(
-            fraOgMedDato = fraOgMedDato,
-            tilOgMedDato = tilOgMedDato,
+            fraOgMedDato = fraOgMedDato.toString(),
+            tilOgMedDato = tilOgMedDato?.toString(),
             beholdning = beholdning
         )
     }
 
     internal fun String.deserialize(): List<AFPBeholdningsgrunnlag> {
         return objectMapper.readValue<(List<AFPBeholdningsgrunnlagDb>)>(this)
-            .map {
+            .map { grunnlag ->
                 AFPBeholdningsgrunnlag(
-                    fraOgMedDato = it.fraOgMedDato,
-                    tilOgMedDato = it.tilOgMedDato,
-                    beholdning = it.beholdning
+                    fraOgMedDato = LocalDate.parse(grunnlag.fraOgMedDato),
+                    tilOgMedDato = grunnlag.tilOgMedDato?.let { LocalDate.parse(it) },
+                    beholdning = grunnlag.beholdning
                 )
             }
     }
@@ -81,7 +80,7 @@ class AFPBeholdiningsgrunnlagBeregnetRepoRepo(
         override fun mapRow(rs: ResultSet, rowNum: Int): AFPBeholdningsgrunnlagBeregnet {
             return AFPBeholdningsgrunnlagBeregnet(
                 id = UUID.fromString(rs.getString("id")),
-                tidspunkt = rs.getTimestamp("tidspunkt").toInstant().atZone(zoneIdOslo),
+                tidspunkt = rs.getTimestamp("tidspunkt").toInstant(),
                 fnr = rs.getString("fnr"),
                 uttaksdato = rs.getDate("uttaksdato").toLocalDate(),
                 konsument = rs.getString("konsument"),
