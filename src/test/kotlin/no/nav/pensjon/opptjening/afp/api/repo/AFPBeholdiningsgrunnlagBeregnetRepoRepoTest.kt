@@ -3,6 +3,7 @@ package no.nav.pensjon.opptjening.afp.api.repo
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdiningsgrunnlagBeregnetRepo
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlag
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlagBeregnet
+import no.nav.pensjon.opptjening.afp.api.domain.zoneIdOslo
 import no.nav.security.token.support.spring.test.EnableMockOAuth2Server
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -11,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import java.time.LocalDate
 import java.time.Month
-import java.time.ZoneOffset
 import java.util.UUID
 
 @SpringBootTest
@@ -26,7 +26,7 @@ class AFPBeholdiningsgrunnlagBeregnetRepoRepoTest {
     fun `lagre og hente`() {
         val expected = AFPBeholdningsgrunnlagBeregnet(
             id = UUID.randomUUID(),
-            tidspunkt = LocalDate.of(2024, Month.FEBRUARY, 22).atStartOfDay().toInstant(ZoneOffset.UTC),
+            tidspunkt = LocalDate.of(2024, Month.FEBRUARY, 22).atStartOfDay(zoneIdOslo),
             fnr = "12345678910",
             uttaksdato = LocalDate.of(2024, Month.FEBRUARY, 22),
             konsument = "TPO",

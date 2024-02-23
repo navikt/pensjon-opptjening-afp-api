@@ -106,8 +106,8 @@ spec:
         cascadingDelete: true
         diskAutoresize: true
         #pointInTimeRecovery: true
-        name: pensjon-opptjening-afp-api-db
+        name: pensjon-opptjening-afp-api
         tier: db-custom-1-3840
         databases:
-          - name: pensjon-opptjening-afp-api-db
+          - name: pensjon-opptjening-afp-api
             envVarPrefix: DATABASE

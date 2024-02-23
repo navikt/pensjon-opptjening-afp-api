@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdiningsgrunnlagBeregnetRepo
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlag
 import no.nav.pensjon.opptjening.afp.api.domain.AFPBeholdningsgrunnlagBeregnet
+import no.nav.pensjon.opptjening.afp.api.domain.zoneIdOslo
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations
@@ -29,7 +30,7 @@ class AFPBeholdiningsgrunnlagBeregnetRepoRepo(
             MapSqlParameterSource(
                 mapOf(
                     "id" to grunnlag.id,
-                    "tidspunkt" to Timestamp.from(grunnlag.tidspunkt),
+                    "tidspunkt" to Timestamp.from(grunnlag.tidspunkt.toInstant()),
                     "fnr" to grunnlag.fnr,
                     "uttaksdato" to grunnlag.uttaksdato,
                     "konsument" to grunnlag.konsument,
@@ -80,9 +81,9 @@ class AFPBeholdiningsgrunnlagBeregnetRepoRepo(
         override fun mapRow(rs: ResultSet, rowNum: Int): AFPBeholdningsgrunnlagBeregnet {
             return AFPBeholdningsgrunnlagBeregnet(
                 id = UUID.fromString(rs.getString("id")),
-                tidspunkt = rs.getTimestamp("tidspunkt").toInstant(),
+                tidspunkt = rs.getTimestamp("tidspunkt").toInstant().atZone(zoneIdOslo),
                 fnr = rs.getString("fnr"),
-                uttaksdato = rs.getTimestamp("uttaksdato").toLocalDateTime().toLocalDate(),
+                uttaksdato = rs.getDate("uttaksdato").toLocalDate(),
                 konsument = rs.getString("konsument"),
                 grunnlag = rs.getString("grunnlag").deserialize()
             )
