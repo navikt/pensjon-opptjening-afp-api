@@ -23,6 +23,7 @@ spec:
   endpoints:
     - path: /opptjening/afp/beholdningsgrunnlag/beregn
       method: POST
+      timeout: 60s
       forwardHeaders:
         - Authorization
         - Content-Type
@@ -31,6 +32,7 @@ spec:
       backendPath: /api/beregn
     - path: /opptjening/afp/beholdningsgrunnlag/simuler
       method: POST
+      timeout: 60s
       forwardHeaders:
         - Authorization
         - Content-Type
