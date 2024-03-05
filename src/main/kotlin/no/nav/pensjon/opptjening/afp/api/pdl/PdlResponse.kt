@@ -7,6 +7,7 @@ import no.nav.pensjon.opptjening.afp.api.domain.person.Person
 import no.nav.pensjon.opptjening.afp.api.domain.person.PersonException
 import java.time.LocalDateTime
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 internal data class PdlResponse(
     val data: PdlData,
     private val errors: List<PdlError>? = null
@@ -86,7 +87,6 @@ internal data class Folkeregisteridentifikator(
 @JsonIgnoreProperties(ignoreUnknown = true)
 internal data class Foedsel(
     val foedselsaar: Int,
-    val foedselsdato: String,
     val metadata: Metadata,
     val folkeregistermetadata: Folkeregistermetadata? = null,
 )
