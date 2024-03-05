@@ -9,6 +9,9 @@ class VelgAFPBeholdningsgrunnlag(
     private val sorted = beholdninger.sortedBy { it.fraOgMedDato }
 
     fun get(): List<AFPBeholdningsgrunnlag> {
-        return sorted.filter { it.tilOgMedDato == null || it.tilOgMedDato >= fraOgMed }
+        return sorted
+            .filter { it.tilOgMedDato == null || it.tilOgMedDato >= fraOgMed }
+            .map { if (it.fraOgMedDato <= fraOgMed) it.copy(fraOgMedDato = fraOgMed) else it }
+            .takeLastWhile { it.fraOgMedDato >= fraOgMed }
     }
 }

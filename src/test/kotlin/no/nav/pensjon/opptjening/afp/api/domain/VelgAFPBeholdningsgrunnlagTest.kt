@@ -32,7 +32,7 @@ class VelgAFPBeholdningsgrunnlagTest {
 
         val expected = listOf(
             AFPBeholdningsgrunnlag(
-                fraOgMedDato = LocalDate.of(2019, Month.JANUARY, 1),
+                fraOgMedDato = LocalDate.of(2019, Month.MARCH, 12),
                 tilOgMedDato = LocalDate.of(2019, Month.APRIL, 30),
                 beholdning = 201900
             ),
@@ -59,7 +59,7 @@ class VelgAFPBeholdningsgrunnlagTest {
 
         val expected = listOf(
             AFPBeholdningsgrunnlag(
-                fraOgMedDato = LocalDate.of(2020, Month.JANUARY, 1),
+                fraOgMedDato = LocalDate.of(2050, Month.MAY, 19),
                 tilOgMedDato = null,
                 beholdning = 202000
             ),

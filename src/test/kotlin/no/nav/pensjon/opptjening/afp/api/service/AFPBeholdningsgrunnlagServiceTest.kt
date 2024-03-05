@@ -111,21 +111,23 @@ class AFPBeholdningsgrunnlagServiceTest {
         mockPerson()
         whenever(pensjonsbeholdning.beregn(any(), any(), any())).thenReturn(listOf(a, b, c))
 
+        val uttaksdato2052 = LocalDate.of(2052, Month.JANUARY, 1)
         val actual2052 = service.beregnAFPBeholdingsgrunnlag(
             fnr = "1",
-            uttaksDato = LocalDate.of(2052, Month.JANUARY, 1),
+            uttaksDato = uttaksdato2052,
             konsument = "k",
         )
 
-        val expected2052 = listOf(b, c)
+        val expected2052 = listOf(b.copy(fraOgMedDato = uttaksdato2052), c)
 
+        val uttaksdato2060 = LocalDate.of(2060, Month.JANUARY, 1)
         val actual2060 = service.beregnAFPBeholdingsgrunnlag(
             fnr = "1",
-            uttaksDato = LocalDate.of(2060, Month.JANUARY, 1),
+            uttaksDato = uttaksdato2060,
             konsument = "k",
         )
 
-        val expected2060 = listOf(c)
+        val expected2060 = listOf(c.copy(fraOgMedDato = uttaksdato2060))
 
         assertThat(actual2052).isEqualTo(expected2052)
         assertThat(actual2060).isEqualTo(expected2060)
@@ -152,21 +154,23 @@ class AFPBeholdningsgrunnlagServiceTest {
         mockPerson()
         whenever(pensjonsbeholdning.simuler(any(), any(), any(), any())).thenReturn(listOf(a, b, c))
 
+        val uttaksdato2052 = LocalDate.of(2052, Month.JANUARY, 1)
         val actual2052 = service.simulerAFPBeholdningsgrunnlag(
             fnr = "1",
-            uttaksDato = LocalDate.of(2052, Month.JANUARY, 1),
+            uttaksDato = uttaksdato2052,
             fremtidigeInntekter = FremtidigeInntekter(emptyList())
         )
 
-        val expected2052 = listOf(b, c)
+        val expected2052 = listOf(b.copy(fraOgMedDato = uttaksdato2052), c)
 
+        val uttaksDato2060 = LocalDate.of(2060, Month.JANUARY, 1)
         val actual2060 = service.simulerAFPBeholdningsgrunnlag(
             fnr = "1",
-            uttaksDato = LocalDate.of(2060, Month.JANUARY, 1),
+            uttaksDato = uttaksDato2060,
             fremtidigeInntekter = FremtidigeInntekter(emptyList())
         )
 
-        val expected2060 = listOf(c)
+        val expected2060 = listOf(c.copy(fraOgMedDato = uttaksDato2060))
 
         assertThat(actual2052).isEqualTo(expected2052)
         assertThat(actual2060).isEqualTo(expected2060)
